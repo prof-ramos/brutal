@@ -1,91 +1,152 @@
-# Brutal - The neobrutalist Astro theme
+# Psicóloga em Outra Dimensão - Site Brutalista
 
-Brutal is a minimal neobrutalist theme for [Astro](https://astro.build/). It's based on Neobrutalist Web Design, a movement that aims to create websites with a minimalistic and functional design. It has some integrations like Image Optimization, RSS, Sitemap, ready to get your SEO done right.
+Um site moderno e impactante para serviços de psicologia, construído com [Astro](https://astro.build/) e estilo neobrutralista. O design combina uma abordagem visual ousada com uma paleta de cores cuidadosamente selecionada para transmitir confiança e acolhimento.
 
-The theme has no JavaScript integration out of the box, but can always be added of course.
+## 🎨 Características do Design
 
-This template is based on [my own personal website](<https://www.elian.codes/>), with some more generic things added.
+### Estilo Brutalista Aprimorado
+- **Tipografia Impactante**: Fontes Space Grotesk e Inter com pesos bold
+- **Bordas Grossas**: Bordas de 8px em cores contrastantes
+- **Sombras Dramáticas**: Drop shadows de 12px com efeitos interativos
+- **Layouts Assimétricos**: Cards rotacionados que se alinham no hover
+- **Cores Vibrantes**: Paleta psicológica com azul, verde-limão, laranja, rosa e roxo
 
-## Usage
+### Recursos de Acessibilidade
+- Estados de foco visíveis para navegação por teclado
+- Suporte a preferências de movimento reduzido
+- Alto contraste para melhor legibilidade
+- Design responsivo otimizado para mobile
 
-You can bootstrap a new Astro project using Brutal with the following command:
+## 🚀 Como Usar
+
+### Pré-requisitos
+- Node.js (versão 18+)
+- PNPM, NPM ou Yarn
+
+### Instalação
 
 ```bash
-# npm
-npm create astro@latest -- --template eliancodes/brutal
+# Clone o repositório
+git clone https://github.com/prof-ramos/brutal.git
+cd brutal
 
-# pnpm
-pnpm create astro@latest --template eliancodes/brutal
-
-# yarn
-yarn create astro --template eliancodes/brutal
+# Instale as dependências
+pnpm install
 ```
 
-### Commands
+### Comandos Disponíveis
 
-All commands are run from the root of the project, from a terminal:
-
-(Here I use PNPM, no problem if you use NPM or Yarn)
-
-| Command             | Action                                             |
+| Comando             | Ação                                               |
 | :------------------ | :------------------------------------------------- |
-| `pnpm install`      | Installs dependencies                              |
-| `pnpm dev`          | Starts local dev server at `localhost:4321`        |
-| `pnpm build`        | Build your production site to `./dist/`            |
-| `pnpm preview`      | Preview your build locally, before deploying       |
-| `pnpm astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `pnpm astro --help` | Get help using the Astro CLI                       |
+| `pnpm install`      | Instala as dependências                            |
+| `pnpm dev`          | Inicia o servidor de desenvolvimento em `localhost:4321` |
+| `pnpm build`        | Constrói o site para produção em `./dist/`        |
+| `pnpm preview`      | Visualiza a versão construída localmente           |
+| `pnpm astro ...`    | Executa comandos CLI como `astro add`              |
 
-## Integrations
+## 🛠️ Tecnologias Utilizadas
 
-### UnoCSS
+### Framework e Build
+- **Astro**: Framework moderno para sites rápidos
+- **UnoCSS**: Framework CSS utility-first compatível com TailwindCSS
+- **TypeScript**: Para desenvolvimento type-safe
 
-In this theme, I'm using [UnoCSS](https://uno.antfu.me/) to generate the CSS. It's a utility-first CSS framework that uses a single class to style elements. It's very easy to use and has a lot of features. It's setup to be completely compatible with TailwindCSS, with the advantage of being able to use PureCSS icons. You can always switch out UnoCSS for TailwindCSS if you want to, without breaking the general styles.
+### Integrações Automáticas
+- **Sitemap**: Gerado automaticamente durante o build
+- **RSS Feed**: Feed XML para posts do blog
+- **Otimização de Imagens**: Processamento automático de imagens
+- **SEO**: Meta tags e structured data otimizados
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── blog/           # Componentes específicos do blog
+│   ├── generic/        # Componentes genéricos
+│   ├── home/           # Componentes da página inicial
+│   └── layout/         # Layout e navegação
+├── content/            # Conteúdo markdown (posts do blog)
+├── layouts/            # Templates de layout
+├── pages/              # Páginas do site
+└── styles/             # Estilos globais CSS
+```
+
+## 🎯 Recursos Específicos para Psicologia
+
+### Paleta de Cores Terapêutica
+- **Azul Primário** (`#4CA6DF`): Confiança e calma
+- **Verde Esperança** (`#BFFF00`): Crescimento e renovação
+- **Laranja Energia** (`#FF6B00`): Motivação e vitalidade
+- **Rosa Empatia** (`#EE99B8`): Conexão e cuidado
+- **Roxo Profundidade** (`#5E18EB`): Introspecção e sabedoria
+
+### Seções Especializadas
+- **Serviços Oferecidos**: Cards interativos com diferentes especialidades
+- **Abordagem Terapêutica**: Descrição da metodologia humanista
+- **Blog Profissional**: Artigos sobre psicologia e bem-estar
+- **Informações de Contato**: Footer com dados para agendamento
+
+## 🎨 Personalização
+
+### Cores
+As cores podem ser modificadas no arquivo `uno.config.ts`:
+
+```typescript
+theme: {
+  colors: {
+    primary: "#4CA6DF",    // Azul confiável
+    secondary: "#BFFF00",  // Verde esperança
+    accent: "#FF6B00",     // Laranja energia
+    tertiary: "#EE99B8",   // Rosa empatia
+    deep: "#5E18EB",       // Roxo profundidade
+  },
+}
+```
+
+### Estilos Brutalistas
+Os estilos podem ser ajustados em `src/styles/global.css`:
+
+```css
+.brutal-card {
+  filter: drop-shadow(12px 12px 0 rgb(0 0 0 / 1));
+  border-style: solid;
+}
+```
+
+## 📱 Responsividade
+
+O site é totalmente responsivo com:
+- Breakpoints otimizados para mobile, tablet e desktop
+- Sombras reduzidas em telas menores para melhor performance
+- Typography scaling apropriado para cada dispositivo
+- Touch targets de tamanho adequado
+
+## 🔧 Configuração de Produção
 
 ### Sitemap
+Configure seu domínio em `astro.config.mjs`:
 
-To generate the sitemap, you don't need to do anything. It's automatically generated when you build your site. You'll just need to switch out the `site` on `astro.config.ts` to your own.
-
-```js title="astro.config.mjs"
-import { defineConfig } from 'astro/config';
-
+```javascript
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://psicologaemoutradimensao.com',
 });
 ```
 
-### RSS
+### RSS Feed
+O feed RSS é gerado automaticamente em `/feed.xml` a partir dos posts do blog.
 
-The RSS feed is automatically generated from the Markdown files in the `src/content/blog` folder. You can ofcourse completely change this to your own needs.
+## 📄 Licença
 
-The RSS will output to `https://example.com/feed.xml` by default. You can change this, by renaming `src/pages/feed.xml.js`.
+Este projeto é baseado no tema Brutal original e foi customizado para atender às necessidades específicas de profissionais da psicologia.
 
-### Image
+## 🤝 Contribuindo
 
-## Components
+Contribuições são bem-vindas! Sinta-se à vontade para:
+- Abrir issues para bugs ou sugestões
+- Enviar pull requests com melhorias
+- Compartilhar feedback sobre a experiência do usuário
 
-### `components/blog/`
+---
 
-This directory contains all components for the blog.
-
-### `components/errors/`
-
-This directory contains all error components.
-
-#### `components/errors/404.astro`
-
-This component is used when a page is not found.
-
-### `components/generic/`
-
-This directory contains all generic components, reused over multiple pages.
-
-### `components/home/`
-
-This directory contains all components for the home page.
-
-### `components/layout/`
-
-This directory contains all layout components. For instance, the header and footer and `<head>` section.
-
-If you need more from this theme, don't hesitate to open an issue or reach out to me!
+💚 Desenvolvido com paixão para profissionais da psicologia que querem causar impacto visual e emocional.
