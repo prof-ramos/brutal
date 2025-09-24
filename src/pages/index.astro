@@ -6,13 +6,13 @@ import { Pill } from '@eliancodes/brutal-ui';
 import { Button } from '@eliancodes/brutal-ui';
 import { Card } from '@eliancodes/brutal-ui';
 
-const services = [
-  { name: 'Terapia Individual', description: 'Acompanhamento personalizado' },
-  { name: 'Terapia de Casal', description: 'Fortaleça seu relacionamento' },
-  { name: 'Terapia Familiar', description: 'Harmonia familiar' },
-  { name: 'Orientação Profissional', description: 'Descubra seu caminho' },
-  { name: 'Mindfulness', description: 'Prática da atenção plena' },
-  { name: 'Coaching', description: 'Alcance seus objetivos' },
+const blogTopics = [
+  { name: 'Autoconhecimento', description: 'Jornadas internas' },
+  { name: 'Reflexões', description: 'Pensamentos profundos' },
+  { name: 'Histórias', description: 'Experiências pessoais' },
+  { name: 'Mindfulness', description: 'Atenção plena' },
+  { name: 'Crescimento', description: 'Desenvolvimento pessoal' },
+  { name: 'Outras Dimensões', description: 'Explorações místicas' },
 ];
 ---
 
@@ -26,12 +26,12 @@ const services = [
 
     <section class='hero-section mb-16'>
       <div class='brutal-card bg-black border-8 border-secondary p-8 transform rotate-1 hover:rotate-0 transition-transform duration-300'>
-        <h1 class='outfit text-3xl md:text-6xl lg:text-8xl font-black text-white mb-6 leading-none'>
+        <h1 class='heading-font text-3xl md:text-6xl lg:text-8xl font-black text-white mb-6 leading-none'>
           PSICÓLOGA EM
-          <span class='block text-secondary text-stroke'>OUTRA DIMENSÃO</span>
+          <span class='block text-secondary text-bold'>OUTRA DIMENSÃO</span>
         </h1>
-        <p class='outfit text-lg md:text-2xl lg:text-4xl text-white font-bold mb-8 max-w-4xl'>
-          TRANSFORMANDO VIDAS ATRAVÉS DA PSICOLOGIA HUMANISTA
+        <p class='heading-font text-lg md:text-2xl lg:text-4xl text-white font-bold mb-8 max-w-4xl'>
+          BLOG PESSOAL DE REFLEXÕES E HISTÓRIAS
         </p>
         <Button target={'_self'} href='/blog/' className='brutal-button bg-accent border-4 border-black text-black font-black text-xl hover:bg-secondary transition-colors'>
           CONHEÇA MEU TRABALHO →
@@ -44,15 +44,15 @@ const services = [
 
       <div class='col-span-12 md:col-span-8'>
         <div class='brutal-card bg-deep border-8 border-tertiary p-8 transform -rotate-1 hover:rotate-0 transition-transform duration-300'>
-          <h2 class='text-2xl md:text-4xl lg:text-6xl mb-6 dm-serif text-white font-black'>
-            SERVIÇOS OFERECIDOS
+          <h2 class='text-2xl md:text-4xl lg:text-6xl mb-6 heading-font text-white font-black'>
+            TEMAS DO BLOG
           </h2>
           <div class='grid grid-cols-2 md:grid-cols-3 gap-4'>
             {
-              services.map((service) => (
+              blogTopics.map((topic) => (
                 <div class='brutal-pill bg-tertiary border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer'>
-                  <h3 class='font-black text-black text-sm md:text-base mb-2'>{service.name}</h3>
-                  <p class='text-black text-xs opacity-80'>{service.description}</p>
+                  <h3 class='heading-font font-black text-black text-sm md:text-base mb-2'>{topic.name}</h3>
+                  <p class='body-font text-black text-xs opacity-80'>{topic.description}</p>
                 </div>
               ))
             }
@@ -62,13 +62,13 @@ const services = [
 
       <div class='col-span-12 md:col-span-4'>
         <div class='brutal-card bg-accent border-8 border-deep p-8 transform rotate-2 hover:rotate-0 transition-transform duration-300'>
-          <h2 class='text-xl md:text-3xl lg:text-5xl mb-6 dm-serif text-black font-black leading-tight'>
-            MINHA ABORDAGEM
+          <h2 class='text-xl md:text-3xl lg:text-5xl mb-6 heading-font text-black font-black leading-tight'>
+            SOBRE O BLOG
           </h2>
-          <p class='poppins text-black font-semibold text-sm md:text-base leading-relaxed'>
-            Trabalho com uma abordagem humanista e integrativa, focada no
-            desenvolvimento pessoal e no bem-estar emocional. Cada sessão é
-            um espaço seguro para explorar suas emoções e encontrar soluções.
+          <p class='body-font text-black font-semibold text-sm md:text-base leading-relaxed'>
+            Este é meu espaço pessoal para compartilhar reflexões, histórias e
+            experiências sobre crescimento pessoal, autoconhecimento e
+            jornadas de descoberta em outra dimensão.
           </p>
         </div>
       </div>
