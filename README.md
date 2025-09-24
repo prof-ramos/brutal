@@ -44,18 +44,36 @@ pnpm install
 | `pnpm preview`      | Visualiza a versão construída localmente           |
 | `pnpm astro ...`    | Executa comandos CLI como `astro add`              |
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Stack Tecnológica
 
-### Framework e Build
-- **Astro**: Framework moderno para sites rápidos
-- **UnoCSS**: Framework CSS utility-first compatível com TailwindCSS
-- **TypeScript**: Para desenvolvimento type-safe
+### Frontend Framework
+- **Astro 5.13.2** - Framework moderno para sites estáticos/híbridos com Islands Architecture
+- **TypeScript** - Linguagem tipada para desenvolvimento type-safe
+- **Vite** - Bundler rápido integrado ao Astro
 
-### Integrações Automáticas
-- **Sitemap**: Gerado automaticamente durante o build
-- **RSS Feed**: Feed XML para posts do blog
-- **Otimização de Imagens**: Processamento automático de imagens
-- **SEO**: Meta tags e structured data otimizados
+### CSS & Design System
+- **UnoCSS 0.57.7** - Framework CSS utility-first compatível com TailwindCSS
+- **Brutal UI 0.2.3** - Biblioteca de componentes neo-brutalistas personalizada
+- **Space Grotesk + Inter** - Fontes Google Fonts para tipografia impactante
+- **Custom CSS** - Estilos brutais personalizados com sombras e efeitos
+
+### Ferramentas de Desenvolvimento
+- **PNPM 8.6.0** - Gerenciador de pacotes eficiente
+- **ESLint + Prettier** - Linting e formatação de código
+- **Sharp** - Processamento otimizado de imagens
+- **Iconify** - Sistema de ícones (logos + uil collections)
+
+### Integrações e SEO
+- **@astrojs/sitemap** - Geração automática de sitemap XML
+- **@astrojs/rss** - Feed RSS para posts do blog
+- **Satori + Satori HTML** - Geração dinâmica de imagens Open Graph
+- **Astro Font** - Otimização automática de carregamento de fontes
+
+### Deploy e Performance
+- **Vercel** - Plataforma de deploy com CDN global
+- **JAMstack** - Arquitetura JavaScript, APIs, Markup
+- **Static Site Generation (SSG)** - HTML estático pré-gerado
+- **Edge Runtime** - Execução otimizada na edge
 
 ## 📁 Estrutura do Projeto
 

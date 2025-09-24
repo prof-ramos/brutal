@@ -1,0 +1,132 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  showPageNumbers?: boolean;
+}
+
+const { currentPage, totalPages, baseUrl, showPageNumbers = true } = Astro.props;
+
+// Generate page numbers to show
+const getPageNumbers = () => {
+  const pageNumbers: (number | string)[] = [];
+  const maxVisiblePages = 5;
+
+  if (totalPages <= maxVisiblePages) {
+    // Show all pages if total is small
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  } else {
+    // Always show first page
+    pageNumbers.push(1);
+
+    if (currentPage > 3) {
+      pageNumbers.push('...');
+    }
+
+    // Show pages around current page
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      if (i !== 1 && i !== totalPages) {
+        pageNumbers.push(i);
+      }
+    }
+
+    if (currentPage < totalPages - 2) {
+      pageNumbers.push('...');
+    }
+
+    // Always show last page
+    if (totalPages > 1) {
+      pageNumbers.push(totalPages);
+    }
+  }
+
+  return pageNumbers;
+};
+
+const pageNumbers = showPageNumbers ? getPageNumbers() : [];
+
+const formatUrl = (page: number) => {
+  if (page === 1) {
+    return baseUrl === '/blog' ? '/blog' : baseUrl;
+  }
+  return `${baseUrl}/${page}`;
+};
+---
+
+{totalPages > 1 && (
+  <nav class="flex justify-center items-center space-x-2 mt-12 mb-8" aria-label="Navegação de páginas">
+    <!-- Previous Page -->
+    {currentPage > 1 ? (
+      <a
+        href={formatUrl(currentPage - 1)}
+        class="px-4 py-2 border-4 border-black bg-white hover:bg-black hover:text-white transition-colors font-bold"
+        aria-label="Página anterior"
+      >
+        &larr; Anterior
+      </a>
+    ) : (
+      <span class="px-4 py-2 border-4 border-gray-300 bg-gray-100 text-gray-400 font-bold">
+        &larr; Anterior
+      </span>
+    )}
+
+    <!-- Page Numbers -->
+    {showPageNumbers && (
+      <div class="hidden md:flex space-x-1">
+        {pageNumbers.map((pageNum) => (
+          typeof pageNum === 'number' ? (
+            <a
+              href={formatUrl(pageNum)}
+              class={`px-4 py-2 border-4 border-black font-bold transition-colors ${
+                pageNum === currentPage
+                  ? 'bg-black text-white'
+                  : 'bg-white hover:bg-black hover:text-white'
+              }`}
+              aria-label={`Ir para página ${pageNum}`}
+              aria-current={pageNum === currentPage ? 'page' : undefined}
+            >
+              {pageNum}
+            </a>
+          ) : (
+            <span class="px-2 py-2 text-gray-500 font-bold">
+              {pageNum}
+            </span>
+          )
+        ))}
+      </div>
+    )}
+
+    <!-- Mobile Page Info -->
+    <div class="md:hidden px-4 py-2 border-4 border-black bg-gray-100 font-bold">
+      {currentPage} de {totalPages}
+    </div>
+
+    <!-- Next Page -->
+    {currentPage < totalPages ? (
+      <a
+        href={formatUrl(currentPage + 1)}
+        class="px-4 py-2 border-4 border-black bg-white hover:bg-black hover:text-white transition-colors font-bold"
+        aria-label="Próxima página"
+      >
+        Próxima &rarr;
+      </a>
+    ) : (
+      <span class="px-4 py-2 border-4 border-gray-300 bg-gray-100 text-gray-400 font-bold">
+        Próxima &rarr;
+      </span>
+    )}
+  </nav>
+)}
+
+<!-- Pagination Info -->
+{totalPages > 1 && (
+  <div class="text-center text-gray-600 text-sm mb-8">
+    Página {currentPage} de {totalPages}
+  </div>
+)}
