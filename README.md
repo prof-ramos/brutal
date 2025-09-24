@@ -69,6 +69,7 @@ src/
 ├── content/            # Conteúdo markdown (posts do blog)
 ├── layouts/            # Templates de layout
 ├── pages/              # Páginas do site
+│   └── mapa-astral.astro  # Página do Mapa AstraL
 └── styles/             # Estilos globais CSS
 ```
 
@@ -85,6 +86,7 @@ src/
 - **Serviços Oferecidos**: Cards interativos com diferentes especialidades
 - **Abordagem Terapêutica**: Descrição da metodologia humanista
 - **Blog Profissional**: Artigos sobre psicologia e bem-estar
+- **Mapa AstraL**: Formulário neo-brutalista conectado à API de psicologia
 - **Informações de Contato**: Footer com dados para agendamento
 
 ## 🎨 Personalização
@@ -135,6 +137,12 @@ export default defineConfig({
 
 ### RSS Feed
 O feed RSS é gerado automaticamente em `/feed.xml` a partir dos posts do blog.
+
+### Integração com API
+A página Mapa AstraL integra-se com a API de psicologia disponível em:
+- **Repositório**: https://github.com/prof-ramos/api-psicologa.git
+- **Localização**: /Users/gabrielramos/api-psicologa
+- **Funcionalidade**: Formulário neo-brutalista para coleta de dados psicológicos
 
 ## 📄 Licença
 
