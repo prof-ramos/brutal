@@ -1,15 +1,15 @@
 {
-  "name": "brutal",
-  "version": "1.2.0",
+  "name": "psicologaemoutradimensao",
+  "version": "1.0.0",
   "private": false,
   "type": "module",
   "packageManager": "pnpm@8.6.0",
   "author": {
-    "name": "Elian Van Cutsem",
-    "email": "hello@elian.codes",
-    "url": "https://www.elian.codes/"
+    "name": "Psicóloga em Outra Dimensão",
+    "email": "contato@psicologaemoutradimensao.com",
+    "url": "https://psicologaemoutradimensao.com/"
   },
-  "homepage": "https://brutal.elian.codes",
+  "homepage": "https://psicologaemoutradimensao.com",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

@@ -6,90 +6,74 @@ import { Pill } from '@eliancodes/brutal-ui';
 import { Button } from '@eliancodes/brutal-ui';
 import { Card } from '@eliancodes/brutal-ui';
 
-const builtWith = [
-  { name: 'Astro', url: 'https://astro.build/' },
-  { name: 'UnoCSS', url: 'https://uno.antfu.me/' },
-  {
-    name: 'Content Collections',
-    url: 'https://docs.astro.build/en/guides/content-collections/',
-  },
-  { name: 'RSS', url: 'https://docs.astro.build/en/guides/rss/' },
-  {
-    name: 'Sitemap',
-    url: 'https://docs.astro.build/en/guides/integrations-guide/sitemap/',
-  },
-  { name: 'Vercel', url: 'https://vercel.com' },
-  { name: 'TypeScript', url: 'https://www.typescriptlang.org/' },
+const services = [
+  { name: 'Terapia Individual', description: 'Acompanhamento personalizado' },
+  { name: 'Terapia de Casal', description: 'Fortaleça seu relacionamento' },
+  { name: 'Terapia Familiar', description: 'Harmonia familiar' },
+  { name: 'Orientação Profissional', description: 'Descubra seu caminho' },
+  { name: 'Mindfulness', description: 'Prática da atenção plena' },
+  { name: 'Coaching', description: 'Alcance seus objetivos' },
 ];
 ---
 
 <Layout
   title='Home'
-  pageTitle='Brutal Theme | Home'
-  description='Brutal is a minimalistic, neobrutalism theme for Astro.'
+  pageTitle='Psicóloga em Outra Dimensão | Home'
+  description='Psicóloga especializada em terapia individual, de casal e familiar. Acompanhe sua jornada de crescimento pessoal.'
 >
-  <main class='bg-pink p-6'>
+  <main class='bg-primary p-6 min-h-screen'>
     <MobileSocials />
-    <section id='about' class='grid md:grid-cols-8 gap-8 mt-4'>
-      <h2 class='hidden'>About Brutal</h2>
-      <div class='col-span-4'>
-        <Card>
-          <div class='flex flex-col justify-between items-start gap-4'>
-            <p class='mt-4 outfit text-2xl md:text-5xl lg:text-7xl'>
-              Brutal theme for <a
-                class='text-white'
-                target='_blank'
-                href='https://astro.build/'>Astro</a
-              >
-            </p>
-            <p class='mt-2 outfit text-xl md:text-3xl lg:text-5xl'>
-              A minimalistic, neobrutalism theme for Astro.
-            </p>
-            <Button target={'_self'} href='/blog/'>
-              Check out the blog &rarr;
-            </Button>
-          </div>
-        </Card>
-      </div>
-      <div class='col-span-2'>
-        <Card>
-          <h2 class='text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif'>
-            Brutal is built with
-          </h2>
-          <ul class='flex gap-4 flex-wrap'>
-            {
-              builtWith.map((item) => (
-                <li>
-                  <Pill>
-                    <a
-                      class='sanchez'
-                      href={item.url}
-                      target='_blank'
-                      title={`Go to ${item.name}`}
-                    >
-                      {item.name}
-                    </a>
-                  </Pill>
-                </li>
-              ))
-            }
-          </ul>
-        </Card>
-      </div>
-      <div class='col-span-2'>
-        <Card>
-          <h2 class='text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif'>
-            What is Brutal?
-          </h2>
-          <p class='poppins'>
-            Brutal is a theme built with Astro, UnoCSS by <a
-              href='https://www.elian.codes/'>Elian</a
-            >. It's a simple, fast, and modern theme that is easy to use and
-            customize. Mainly meant to power blogs and personal websites.
-          </p>
-        </Card>
+
+    <section class='hero-section mb-16'>
+      <div class='brutal-card bg-black border-8 border-secondary p-8 transform rotate-1 hover:rotate-0 transition-transform duration-300'>
+        <h1 class='outfit text-3xl md:text-6xl lg:text-8xl font-black text-white mb-6 leading-none'>
+          PSICÓLOGA EM
+          <span class='block text-secondary text-stroke'>OUTRA DIMENSÃO</span>
+        </h1>
+        <p class='outfit text-lg md:text-2xl lg:text-4xl text-white font-bold mb-8 max-w-4xl'>
+          TRANSFORMANDO VIDAS ATRAVÉS DA PSICOLOGIA HUMANISTA
+        </p>
+        <Button target={'_self'} href='/blog/' className='brutal-button bg-accent border-4 border-black text-black font-black text-xl hover:bg-secondary transition-colors'>
+          CONHEÇA MEU TRABALHO →
+        </Button>
       </div>
     </section>
+
+    <section id='about' class='grid md:grid-cols-12 gap-8 mb-16'>
+      <h2 class='hidden'>Sobre a Psicóloga</h2>
+
+      <div class='col-span-12 md:col-span-8'>
+        <div class='brutal-card bg-deep border-8 border-tertiary p-8 transform -rotate-1 hover:rotate-0 transition-transform duration-300'>
+          <h2 class='text-2xl md:text-4xl lg:text-6xl mb-6 dm-serif text-white font-black'>
+            SERVIÇOS OFERECIDOS
+          </h2>
+          <div class='grid grid-cols-2 md:grid-cols-3 gap-4'>
+            {
+              services.map((service) => (
+                <div class='brutal-pill bg-tertiary border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer'>
+                  <h3 class='font-black text-black text-sm md:text-base mb-2'>{service.name}</h3>
+                  <p class='text-black text-xs opacity-80'>{service.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class='col-span-12 md:col-span-4'>
+        <div class='brutal-card bg-accent border-8 border-deep p-8 transform rotate-2 hover:rotate-0 transition-transform duration-300'>
+          <h2 class='text-xl md:text-3xl lg:text-5xl mb-6 dm-serif text-black font-black leading-tight'>
+            MINHA ABORDAGEM
+          </h2>
+          <p class='poppins text-black font-semibold text-sm md:text-base leading-relaxed'>
+            Trabalho com uma abordagem humanista e integrativa, focada no
+            desenvolvimento pessoal e no bem-estar emocional. Cada sessão é
+            um espaço seguro para explorar suas emoções e encontrar soluções.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <RecentBlogPosts />
   </main>
 </Layout>

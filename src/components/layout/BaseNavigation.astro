@@ -10,14 +10,14 @@ const navigationItems = [
 
 const socialIcons = [
   {
-    name: 'GitHub',
-    url: 'https://github.com/eliancodes/brutal',
-    icon: 'i-uil-github',
+    name: 'Instagram',
+    url: 'https://instagram.com/psicologaemoutradimensao',
+    icon: 'i-uil-instagram',
   },
   {
-    name: 'Twitter',
-    url: 'https://www.twitter.com/eliancodes',
-    icon: 'i-uil-twitter',
+    name: 'WhatsApp',
+    url: 'https://wa.me/5511999999999',
+    icon: 'i-uil-whatsapp',
   },
   { name: 'RSS', url: '/feed.xml', icon: 'i-uil-rss' },
 ];
@@ -25,21 +25,21 @@ const socialIcons = [
 const { pageTitle } = Astro.props;
 ---
 
-<header class='border-b-4 border-black flex justify-between p-6 items-center'>
+<header class='bg-secondary border-b-8 border-black flex justify-between p-6 items-center brutal-card'>
   {pageTitle && <h1 class='hidden'>{pageTitle}</h1>}
-  <a href='/' title='Back to Home'>
-    <p class='righteous md:text-5xl'>Brutal</p>
+  <a href='/' title='Voltar ao Início' class='brutal-button bg-deep border-4 border-black text-white px-4 py-2'>
+    <p class='righteous text-lg md:text-3xl font-black'>PSICÓLOGA</p>
   </a>
   <nav class='hidden md:inline-block'>
     <h2 class='hidden'>Navigation</h2>
-    <ul class='flex gap-8 poppins'>
+    <ul class='flex gap-6 poppins'>
       {
         navigationItems.map((item) => (
           <li>
             <a
-              class='text-lg font-medium hover:text-green hover:underline transition-all duration-150 ease-in-out'
+              class='brutal-pill bg-accent border-3 border-black text-black font-black text-sm px-4 py-2 hover:bg-tertiary transition-colors uppercase tracking-wider'
               href={item.url}
-              title={`Go to ${item.name}`}
+              title={`Ir para ${item.name}`}
             >
               {item.name}
             </a>
@@ -51,11 +51,11 @@ const { pageTitle } = Astro.props;
           <li>
             <a
               href={item.url}
-              class='hover:text-green hover:underline transition-all duration-150 ease-in-out'
+              class='brutal-pill bg-primary border-3 border-black p-3 hover:bg-tertiary transition-colors'
               target='_blank'
-              title={`'See @ElianCodes on ${item.name}`}
+              title={`Visite nosso ${item.name}`}
             >
-              <div class:list={[item.icon, 'w-6 h-6']} />
+              <div class:list={[item.icon, 'w-5 h-5 text-black']} />
             </a>
           </li>
         ))
@@ -64,8 +64,8 @@ const { pageTitle } = Astro.props;
   </nav>
   <nav class='md:hidden flex'>
     <h2 class='hidden'>Mobile Navigation</h2>
-    <ul>
-      <li><a href='/blog/'>Blog</a></li>
+    <ul class='flex gap-2'>
+      <li><a href='/blog/' class='brutal-pill bg-accent border-2 border-black text-black font-black px-3 py-1 text-sm'>BLOG</a></li>
     </ul>
   </nav>
 </header>

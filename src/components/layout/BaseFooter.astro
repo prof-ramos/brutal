@@ -33,15 +33,30 @@ const { backToTop = false } = Astro.props;
   )
 }
 
-<footer class='bg-black text-white p-6'>
+<footer class='bg-deep text-white p-8 border-t-8 border-secondary brutal-card'>
   <h2 class='hidden'>Footer</h2>
-  <p class='outfit'>
-    Brutal theme for Astro - by <a
-      href='https://www.elian.codes/'
-      target='_blank'
-      class='text-blue'>ElianCodes</a
-    >
-  </p>
+  <div class='grid md:grid-cols-3 gap-6'>
+    <div class='brutal-pill bg-tertiary border-4 border-black p-6'>
+      <h3 class='font-black text-black text-xl mb-3 uppercase'>CONTATO</h3>
+      <p class='text-black font-semibold'>contato@psicologaemoutradimensao.com</p>
+      <p class='text-black font-semibold'>+55 11 99999-9999</p>
+    </div>
+    <div class='brutal-pill bg-accent border-4 border-black p-6'>
+      <h3 class='font-black text-black text-xl mb-3 uppercase'>LOCALIZAÇÃO</h3>
+      <p class='text-black font-semibold'>São Paulo - SP</p>
+      <p class='text-black font-semibold'>Atendimento Online e Presencial</p>
+    </div>
+    <div class='brutal-pill bg-primary border-4 border-black p-6'>
+      <h3 class='font-black text-black text-xl mb-3 uppercase'>HORÁRIOS</h3>
+      <p class='text-black font-semibold'>Segunda a Sexta: 8h - 18h</p>
+      <p class='text-black font-semibold'>Sábados: 8h - 12h</p>
+    </div>
+  </div>
+  <div class='mt-8 text-center'>
+    <p class='outfit text-white font-bold'>
+      © 2024 Psicóloga em Outra Dimensão - Todos os direitos reservados
+    </p>
+  </div>
 </footer>
 
 <style>

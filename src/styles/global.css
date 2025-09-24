@@ -1,6 +1,55 @@
+/* ---- 🔤 TYPOGRAPHY ENHANCEMENTS 🔤 ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---- 🔨 BRUTAL STYLING 🔨 ---- */
+.brutal-card {
+  filter: drop-shadow(12px 12px 0 rgb(0 0 0 / 1));
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-style: solid;
+}
+
+.brutal-card:hover {
+  filter: drop-shadow(8px 8px 0 rgb(0 0 0 / 1));
+  transform: translate(2px, 2px) !important;
+}
+
+.brutal-pill {
+  filter: drop-shadow(4px 4px 0 rgb(0 0 0 / 1));
+  transition: all 0.2s ease-in-out;
+  border-style: solid;
+}
+
+.brutal-pill:hover {
+  filter: drop-shadow(2px 2px 0 rgb(0 0 0 / 1));
+  transform: translate(1px, 1px);
+}
+
+.brutal-button {
+  filter: drop-shadow(6px 6px 0 rgb(0 0 0 / 1));
+  transition: all 0.2s ease-in-out;
+  border-style: solid !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.brutal-button:hover {
+  filter: drop-shadow(3px 3px 0 rgb(0 0 0 / 1));
+  transform: translate(2px, 2px);
+}
+
+.text-stroke {
+  text-shadow:
+    3px 3px 0px #000,
+    -1px -1px 0px #000,
+    1px -1px 0px #000,
+    -1px 1px 0px #000,
+    1px 1px 0px #000;
+}
 
 .card-shadow {
   filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
@@ -25,6 +74,38 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ---- 🔤 TYPOGRAPHY ENHANCEMENTS 🔤 ---- */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.outfit {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+.poppins {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.righteous {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+.dm-serif {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+.sanchez {
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -115,7 +196,70 @@ html {
   border-right: none;
 }
 
-::selection
-{
-  background-color: aliceblue;
+/* ---- 📱 RESPONSIVE & ACCESSIBILITY ---- */
+::selection {
+  background-color: #BFFF00;
+  color: #000;
+}
+
+/* Focus states for accessibility */
+.brutal-button:focus,
+.brutal-pill:focus,
+.brutal-card:focus {
+  outline: 4px solid #FF6B00;
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .brutal-card,
+  .brutal-pill,
+  .brutal-button {
+    transition: none;
+    transform: none !important;
+  }
+
+  .brutal-card:hover {
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .brutal-card,
+  .brutal-pill,
+  .brutal-button {
+    border-width: 6px;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .brutal-card {
+    filter: drop-shadow(6px 6px 0 rgb(0 0 0 / 1));
+  }
+
+  .brutal-card:hover {
+    filter: drop-shadow(4px 4px 0 rgb(0 0 0 / 1));
+  }
+
+  .text-stroke {
+    text-shadow:
+      2px 2px 0px #000,
+      -1px -1px 0px #000,
+      1px -1px 0px #000,
+      -1px 1px 0px #000,
+      1px 1px 0px #000;
+  }
+}
+
+/* Print styles */
+@media print {
+  .brutal-card,
+  .brutal-pill,
+  .brutal-button {
+    filter: none;
+    border: 2px solid #000;
+    box-shadow: none;
+  }
 }
