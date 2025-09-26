@@ -7,19 +7,19 @@ import { Button } from '@eliancodes/brutal-ui';
 import { Card } from '@eliancodes/brutal-ui';
 
 const blogTopics = [
-  { name: 'Autoconhecimento', description: 'Jornadas internas' },
-  { name: 'Reflexões', description: 'Pensamentos profundos' },
-  { name: 'Histórias', description: 'Experiências pessoais' },
-  { name: 'Mindfulness', description: 'Atenção plena' },
-  { name: 'Crescimento', description: 'Desenvolvimento pessoal' },
-  { name: 'Outras Dimensões', description: 'Explorações místicas' },
+  { name: 'Zodíaco', description: 'Signos e personalidades', icon: 'i-uil-star' },
+  { name: 'Compatibilidade', description: 'Amor cósmico', icon: 'i-uil-heart' },
+  { name: 'Roasts Astrais', description: 'Humor zodiacal', icon: 'i-uil-fire' },
+  { name: 'Horóscopos', description: 'Previsões galácticas', icon: 'i-uil-moon' },
+  { name: 'Lua & Planetas', description: 'Energias celestiais', icon: 'i-uil-moon' },
+  { name: 'Memes Cósmicos', description: 'Risadas estelares', icon: 'i-uil-smile' },
 ];
 ---
 
 <Layout
   title='Home'
   pageTitle='Psicóloga em Outra Dimensão | Home'
-  description='Psicóloga especializada em terapia individual, de casal e familiar. Acompanhe sua jornada de crescimento pessoal.'
+  description='Blog de astrologia com humor! Descubra os segredos do zodíaco, compatibilidade amorosa e roasts cósmicos. Diversão garantida!'
 >
   <main class='bg-primary p-6 min-h-screen'>
     <MobileSocials />
@@ -30,11 +30,11 @@ const blogTopics = [
           PSICÓLOGA EM
           <span class='block text-secondary text-bold'>OUTRA DIMENSÃO</span>
         </h1>
-        <p class='heading-font text-lg md:text-2xl lg:text-4xl text-white font-bold mb-8 max-w-4xl'>
-          BLOG PESSOAL DE REFLEXÕES E HISTÓRIAS
+        <p class='heading-font text-lg md:text-2xl lg:text-4xl text-white font-bold mb-8 max-w-4xl flex items-center gap-4'>
+          ASTROLOGIA COM HUMOR E MUITO SARCASMO CÓSMICO <div class="i-uil-star text-secondary"></div>
         </p>
         <Button target={'_self'} href='/blog/' className='brutal-button bg-accent border-4 border-black text-black font-black text-xl hover:bg-secondary transition-colors'>
-          CONHEÇA MEU TRABALHO →
+          DESCUBRA OS SEGREDOS DO ZODÍACO →
         </Button>
       </div>
     </section>
@@ -50,7 +50,8 @@ const blogTopics = [
           <div class='grid grid-cols-2 md:grid-cols-3 gap-4'>
             {
               blogTopics.map((topic) => (
-                <div class='brutal-pill bg-tertiary border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer'>
+                <div class='brutal-pill bg-tertiary border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer group'>
+                  <div class={`${topic.icon} text-2xl mb-2 group-hover:scale-110 transition-transform text-black`}></div>
                   <h3 class='heading-font font-black text-black text-sm md:text-base mb-2'>{topic.name}</h3>
                   <p class='body-font text-black text-xs opacity-80'>{topic.description}</p>
                 </div>
@@ -65,10 +66,11 @@ const blogTopics = [
           <h2 class='text-xl md:text-3xl lg:text-5xl mb-6 heading-font text-black font-black leading-tight'>
             SOBRE O BLOG
           </h2>
-          <p class='body-font text-black font-semibold text-sm md:text-base leading-relaxed'>
-            Este é meu espaço pessoal para compartilhar reflexões, histórias e
-            experiências sobre crescimento pessoal, autoconhecimento e
-            jornadas de descoberta em outra dimensão.
+          <p class='body-font text-black font-semibold text-sm md:text-base leading-relaxed flex flex-col gap-2'>
+            <span>Bem-vindos ao meu universo astrológico! Aqui você encontra roasts
+            cósmicos, análises de signos com humor ácido e a verdade nua e crua
+            sobre compatibilidade zodiacal.</span>
+            <span class="flex items-center gap-2">Prepare-se para rir (e se ofender um pouquinho). <div class="i-uil-grin text-deep"></div></span>
           </p>
         </div>
       </div>

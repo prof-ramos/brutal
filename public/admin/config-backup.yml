@@ -1,0 +1,109 @@
+backend:
+  name: github
+  repo: prof-ramos/brutal
+  branch: main
+
+editorial_workflow: true
+
+media_folder: "public/images/posts"
+public_folder: "/images/posts"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      # Metadados básicos
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descrição", name: "description", widget: "string" }
+      - { label: "Data de Publicação", name: "pubDate", widget: "datetime" }
+      - { label: "Data de Atualização", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Autor", name: "author", widget: "string" }
+
+      # Categoria específica de psicologia
+      - label: "Categoria"
+        name: "category"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Psicologia Cognitiva", value: "cognitive-psychology" }
+          - { label: "Psicologia Comportamental", value: "behavioral-psychology" }
+          - { label: "Psicologia Clínica", value: "clinical-psychology" }
+          - { label: "Psicologia do Desenvolvimento", value: "developmental-psychology" }
+          - { label: "Psicologia Social", value: "social-psychology" }
+          - { label: "Neuropsicologia", value: "neuropsychology" }
+          - { label: "Psicologia Positiva", value: "positive-psychology" }
+          - { label: "Técnicas Terapêuticas", value: "therapy-techniques" }
+          - { label: "Saúde Mental", value: "mental-health" }
+          - { label: "Insights de Pesquisa", value: "research-insights" }
+          - { label: "Estudos de Caso", value: "case-studies" }
+          - { label: "Dicas de Bem-estar", value: "wellness-tips" }
+
+      # Tags para melhor descoberta de conteúdo
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        field: { label: "Tag", name: "tag", widget: "string" }
+
+      # Metadados de conteúdo
+      - { label: "Tempo de Leitura (minutos)", name: "readingTime", widget: "number", required: false }
+      - label: "Dificuldade"
+        name: "difficulty"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Iniciante", value: "beginner" }
+          - { label: "Intermediário", value: "intermediate" }
+          - { label: "Avançado", value: "advanced" }
+
+      # Imagens e mídia
+      - { label: "Imagem Principal", name: "heroImage", widget: "image", required: false }
+      - { label: "Texto Alternativo da Imagem", name: "heroImageAlt", widget: "string", required: false }
+
+      # SEO e social
+      - { label: "Rascunho", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Destaque", name: "featured", widget: "boolean", default: false, required: false }
+
+      # Metadados específicos de psicologia
+      - label: "Público-alvo"
+        name: "targetAudience"
+        widget: "select"
+        required: false
+        options:
+          - { label: "Público Geral", value: "general-public" }
+          - { label: "Estudantes", value: "students" }
+          - { label: "Profissionais", value: "professionals" }
+          - { label: "Pesquisadores", value: "researchers" }
+          - { label: "Clínicos", value: "clinicians" }
+
+      # Avisos de conteúdo para tópicos sensíveis
+      - label: "Avisos de Conteúdo"
+        name: "contentWarning"
+        widget: "list"
+        required: false
+        field: { label: "Aviso", name: "warning", widget: "string" }
+
+      # Conteúdo relacionado
+      - label: "Posts Relacionados"
+        name: "relatedPosts"
+        widget: "list"
+        required: false
+        field: { label: "Slug do Post", name: "post", widget: "string" }
+
+      # Validação científica
+      - label: "Referências"
+        name: "references"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Autores", name: "authors", widget: "string" }
+          - { label: "Revista/Jornal", name: "journal", widget: "string", required: false }
+          - { label: "Ano", name: "year", widget: "number" }
+          - { label: "DOI", name: "doi", widget: "string", required: false }
+          - { label: "URL", name: "url", widget: "string", required: false }
+
+      # Conteúdo principal
+      - { label: "Conteúdo", name: "body", widget: "markdown" }

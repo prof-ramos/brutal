@@ -10,16 +10,10 @@ const navigationItems = [
 
 const socialIcons = [
   {
-    name: 'Instagram',
-    url: 'https://instagram.com/psicologaemoutradimensao',
-    icon: 'i-uil-instagram',
+    name: 'Twitter',
+    url: 'https://x.com/Gayaliz_',
+    icon: 'i-uil-twitter',
   },
-  {
-    name: 'WhatsApp',
-    url: 'https://wa.me/5511999999999',
-    icon: 'i-uil-whatsapp',
-  },
-  { name: 'RSS', url: '/feed.xml', icon: 'i-uil-rss' },
 ];
 
 const { pageTitle } = Astro.props;
@@ -62,10 +56,11 @@ const { pageTitle } = Astro.props;
       }
     </ul>
   </nav>
-  <nav class='md:hidden flex'>
+  <nav class='md:hidden flex gap-2'>
     <h2 class='hidden'>Mobile Navigation</h2>
     <ul class='flex gap-2'>
-      <li><a href='/blog/' class='brutal-pill bg-accent border-2 border-black text-black font-black px-3 py-1 text-sm'>BLOG</a></li>
+      <li><a href='/blog/' class='brutal-pill bg-accent border-2 border-black text-black font-black px-3 py-1 text-sm flex items-center gap-2'><div class='i-uil-book-open'></div> BLOG</a></li>
+      <li><a href='/admin' class='brutal-pill bg-tertiary border-2 border-black text-black font-black px-3 py-1 text-sm'><div class='i-uil-setting'></div></a></li>
     </ul>
   </nav>
 </header>

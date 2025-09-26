@@ -1,0 +1,44 @@
+backend:
+  name: github
+  repo: prof-ramos/brutal
+  branch: main
+
+editorial_workflow: true
+
+media_folder: "public/images/posts"
+public_folder: "/images/posts"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "Título"
+        name: "title"
+        widget: "string"
+      - label: "Descrição"
+        name: "description"
+        widget: "string"
+      - label: "Data de Publicação"
+        name: "pubDate"
+        widget: "datetime"
+      - label: "Autor"
+        name: "author"
+        widget: "string"
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        field:
+          label: "Tag"
+          name: "tag"
+          widget: "string"
+      - label: "Rascunho"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
+      - label: "Conteúdo"
+        name: "body"
+        widget: "markdown"
