@@ -29,6 +29,9 @@ dependencies:
   satori-html:
     specifier: ^0.3.2
     version: 0.3.2
+  zod:
+    specifier: ^4.1.11
+    version: 4.1.11
 
 devDependencies:
   '@iconify-json/logos':
@@ -6813,6 +6816,10 @@ packages:
 
   /zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+    dev: false
+
+  /zod@4.1.11:
+    resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
     dev: false
 
   /zwitch@2.0.4:

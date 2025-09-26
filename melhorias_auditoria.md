@@ -10,7 +10,7 @@ Este arquivo resume as ações recomendadas após a auditoria técnica do projet
 - [x] **Implementar Headers de Segurança:** Adicionar headers de segurança essenciais no arquivo `astro.config.ts` para proteger a aplicação contra ataques web comuns.
   - **Ação:** Configurar no mínimo `Content-Security-Policy`, `X-Frame-Options`, e `X-Content-Type-Options`.
 
-- [ ] **Adicionar Validação no Servidor:** Implementar validação de dados robusta no lado do servidor (server-side) para a API que recebe os dados do formulário "Mapa Astral". (Adiado - API não implementada).
+- [x] **Adicionar Validação no Servidor:** Implementar validação de dados robusta no lado do servidor (server-side) para a API que recebe os dados do formulário "Mapa Astral".
   - **Ação:** Utilizar uma biblioteca de validação de esquema como `Zod` para validar todos os campos recebidos pela API.
 
 ### Otimização (Prioridade Média)
