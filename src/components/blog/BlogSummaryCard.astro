@@ -9,20 +9,20 @@ interface Props {
 
 const { post } = Astro.props;
 
-// Category translations for Portuguese
-const categoryLabels: Record<string, string> = {
-  'cognitive-psychology': 'Psicologia Cognitiva',
-  'behavioral-psychology': 'Psicologia Comportamental',
-  'clinical-psychology': 'Psicologia Clínica',
-  'developmental-psychology': 'Psicologia do Desenvolvimento',
-  'social-psychology': 'Psicologia Social',
-  'neuropsychology': 'Neuropsicologia',
-  'positive-psychology': 'Psicologia Positiva',
-  'therapy-techniques': 'Técnicas Terapêuticas',
-  'mental-health': 'Saúde Mental',
-  'research-insights': 'Pesquisas',
-  'case-studies': 'Estudos de Caso',
-  'wellness-tips': 'Bem-estar'
+// Category translations for astrology with icons
+const categoryData: Record<string, {label: string, icon: string}> = {
+  'zodiac-signs': {label: 'Signos do Zodíaco', icon: 'i-uil-star'},
+  'horoscopes': {label: 'Horóscopos', icon: 'i-uil-moon'},
+  'compatibility': {label: 'Compatibilidade', icon: 'i-uil-heart'},
+  'birth-charts': {label: 'Mapa Astral', icon: 'i-uil-chart'},
+  'moon-phases': {label: 'Fases da Lua', icon: 'i-uil-moon'},
+  'planetary-transits': {label: 'Trânsitos', icon: 'i-uil-arrows-h'},
+  'tarot-readings': {label: 'Tarô', icon: 'i-uil-layers'},
+  'crystal-healing': {label: 'Cristais', icon: 'i-uil-diamond'},
+  'spiritual-guidance': {label: 'Orientação Espiritual', icon: 'i-uil-star'},
+  'cosmic-humor': {label: 'Humor Cósmico', icon: 'i-uil-smile'},
+  'astro-memes': {label: 'Memes Astrais', icon: 'i-uil-grin'},
+  'sign-roasting': {label: 'Roast de Signos', icon: 'i-uil-fire'}
 };
 
 const difficultyLabels: Record<string, string> = {
@@ -31,12 +31,12 @@ const difficultyLabels: Record<string, string> = {
   'advanced': 'Avançado'
 };
 
-const targetAudienceLabels: Record<string, string> = {
-  'general-public': 'Público Geral',
-  'students': 'Estudantes',
-  'professionals': 'Profissionais',
-  'researchers': 'Pesquisadores',
-  'clinicians': 'Clínicos'
+const targetAudienceData: Record<string, {label: string, icon: string}> = {
+  'astrology-beginners': {label: 'Iniciantes na Astrologia', icon: 'i-uil-seedling'},
+  'zodiac-enthusiasts': {label: 'Entusiastas do Zodíaco', icon: 'i-uil-star'},
+  'spiritual-seekers': {label: 'Buscadores Espirituais', icon: 'i-uil-search'},
+  'cosmic-skeptics': {label: 'Céticos Cósmicos', icon: 'i-uil-question-circle'},
+  'meme-lovers': {label: 'Amantes de Memes', icon: 'i-uil-grin'}
 };
 
 // Format reading time
@@ -53,33 +53,44 @@ const formatDate = (date: Date) => {
     day: 'numeric'
   }).format(date);
 };
+
+// Zodiac sign icons
+const zodiacIcons: Record<string, string> = {
+  'aries': 'i-uil-fire', 'taurus': 'i-uil-trees', 'gemini': 'i-uil-chat', 'cancer': 'i-uil-moon',
+  'leo': 'i-uil-star', 'virgo': 'i-uil-flower', 'libra': 'i-uil-balance-scale', 'scorpio': 'i-uil-bug',
+  'sagittarius': 'i-uil-arrow', 'capricorn': 'i-uil-mountains', 'aquarius': 'i-uil-water-drop-slash', 'pisces': 'i-uil-fish'
+};
 ---
 
 <article class="bg-white border-4 border-black card-shadow p-6 h-full flex flex-col">
   <!-- Featured Badge -->
   {post.data.featured && (
     <div class="mb-4">
-      <span class="bg-yellow-400 border-2 border-black px-3 py-1 text-sm font-bold uppercase">
-        Em Destaque
+      <span class="bg-secondary border-4 border-black px-4 py-2 text-sm font-black uppercase tracking-wider brutal-pill animate-pulse flex items-center gap-2">
+        <div class="i-uil-star"></div> EM DESTAQUE <div class="i-uil-star"></div>
       </span>
     </div>
   )}
 
   <!-- Category -->
-  {post.data.category && (
-    <div class="mb-2">
+  {post.data.category && categoryData[post.data.category] && (
+    <div class="mb-3">
       <a
         href={`/blog/category/${post.data.category}`}
-        class="text-sm font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wider"
+        class="inline-flex items-center gap-2 bg-black text-white px-3 py-2 text-sm font-bold uppercase tracking-wider hover:bg-deep transition-colors brutal-pill"
       >
-        {categoryLabels[post.data.category] || post.data.category}
+        <div class={`${categoryData[post.data.category].icon} text-sm`}></div>
+        {categoryData[post.data.category].label}
       </a>
     </div>
   )}
 
   <!-- Title -->
-  <h2 class="text-xl md:text-2xl font-bold mb-3 line-clamp-2 heading-font">
-    <a href={`/blog/${post.id}/`} class="text-black hover:text-blue-600 transition-colors">
+  <h2 class="text-xl md:text-2xl font-bold mb-3 line-clamp-2 heading-font flex items-start gap-2">
+    {post.data.zodiacSign && (
+      <div class={`${zodiacIcons[post.data.zodiacSign]} text-2xl flex-shrink-0 text-deep`}></div>
+    )}
+    <a href={`/blog/${post.id}/`} class="text-black hover:text-deep transition-colors">
       {post.data.title}
     </a>
   </h2>
@@ -93,20 +104,39 @@ const formatDate = (date: Date) => {
 
     <div class="flex items-center justify-between text-xs">
       {post.data.readingTime && (
-        <span class="bg-gray-100 px-2 py-1 border border-gray-300">
-          📖 {formatReadingTime(post.data.readingTime)}
+        <span class="bg-gray-100 px-2 py-1 border border-gray-300 flex items-center gap-1">
+          <div class="i-uil-book-open text-xs"></div> {formatReadingTime(post.data.readingTime)}
         </span>
       )}
 
-      {post.data.difficulty && (
-        <span class={`px-2 py-1 border border-black ${
-          post.data.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
-          post.data.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
-          'bg-red-100 text-red-800'
-        }`}>
-          {difficultyLabels[post.data.difficulty]}
-        </span>
-      )}
+      <div class="flex gap-2">
+        {post.data.difficulty && (
+          <span class={`px-2 py-1 border border-black text-xs font-bold ${
+            post.data.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
+            post.data.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
+            'bg-red-100 text-red-800'
+          }`}>
+            {difficultyLabels[post.data.difficulty]}
+          </span>
+        )}
+        {post.data.humorLevel && (
+          <span class={`px-2 py-1 border border-black text-xs font-bold flex items-center gap-1 ${
+            post.data.humorLevel === 'subtle' ? 'bg-blue-100 text-blue-800' :
+            post.data.humorLevel === 'moderate' ? 'bg-orange-100 text-orange-800' :
+            post.data.humorLevel === 'savage' ? 'bg-red-100 text-red-800' :
+            'bg-purple-100 text-purple-800'
+          }`}>
+            <div class={
+              post.data.humorLevel === 'subtle' ? 'i-uil-smile' :
+              post.data.humorLevel === 'moderate' ? 'i-uil-grin' :
+              post.data.humorLevel === 'savage' ? 'i-uil-fire' : 'i-uil-times-circle'
+            }></div>
+            {post.data.humorLevel === 'subtle' ? 'Sutil' :
+             post.data.humorLevel === 'moderate' ? 'Moderado' :
+             post.data.humorLevel === 'savage' ? 'Savage' : 'Brutal'}
+          </span>
+        )}
+      </div>
     </div>
   </div>
 
@@ -133,26 +163,27 @@ const formatDate = (date: Date) => {
         <li>
           <a
             href={`/blog/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-            class="inline-block bg-gray-100 hover:bg-black hover:text-white border border-gray-300 px-2 py-1 text-xs transition-colors"
+            class="inline-block bg-tertiary hover:bg-accent border-2 border-black px-3 py-1 text-xs font-bold text-black transition-colors brutal-pill"
           >
             #{tag}
           </a>
         </li>
       ))}
       {post.data.tags && post.data.tags.length > 4 && (
-        <li class="text-xs text-gray-500 px-2 py-1">
-          +{post.data.tags.length - 4} mais
+        <li class="text-xs font-bold text-deep px-2 py-1 flex items-center gap-1">
+          +{post.data.tags.length - 4} mais <div class="i-uil-star text-xs"></div>
         </li>
       )}
     </ul>
   </div>
 
   <!-- Target Audience -->
-  {post.data.targetAudience && (
-    <div class="mb-4 text-sm">
-      <span class="text-gray-600">Público-alvo: </span>
-      <span class="font-semibold">
-        {targetAudienceLabels[post.data.targetAudience] || post.data.targetAudience}
+  {post.data.targetAudience && targetAudienceData[post.data.targetAudience] && (
+    <div class="mb-4 text-sm flex items-center gap-2">
+      <span class="text-gray-600">Público-alvo:</span>
+      <span class="font-semibold flex items-center gap-1">
+        <div class={`${targetAudienceData[post.data.targetAudience].icon} text-xs`}></div>
+        {targetAudienceData[post.data.targetAudience].label}
       </span>
     </div>
   )}

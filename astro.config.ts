@@ -12,10 +12,6 @@ export default defineConfig({
       : 'https://localhost:3000/',
   trailingSlash: 'ignore',
   integrations: [sitemap(), UnoCSS({ injectReset: true })],
-  // Enable content collections
-  experimental: {
-    contentCollectionCache: true,
-  },
   vite: {
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
