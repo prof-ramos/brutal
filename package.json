@@ -10,6 +10,7 @@
     "url": "https://psicologaemoutradimensao.com/"
   },
   "homepage": "https://psicologaemoutradimensao.com",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
