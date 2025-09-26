@@ -7,7 +7,7 @@ category: "sign-roasting"
 zodiacSign: "virgo"
 tags: ["virgem", "crítica", "perfeccionismo", "roast"]
 readingTime: 5
-difficulty: "moderate"
+difficulty: "intermediate"
 targetAudience: "cosmic-skeptics"
 humorLevel: "savage"
 draft: false
