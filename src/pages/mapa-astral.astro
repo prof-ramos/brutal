@@ -18,116 +18,52 @@ import { Button } from '@eliancodes/brutal-ui';
           Descubra insights sobre sua personalidade
         </p>
 
-        <form id='astral-form' class='space-y-6'>
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='nome'>
-              NOME COMPLETO
-            </label>
-            <input
-              placeholder='Digite seu nome completo'
-              id='nome'
-              name='nome'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors'
-              type='text'
-              required
-            />
+        <form id="astral-form" class="space-y-6">
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="nome">NOME COMPLETO</label>
+            <input placeholder="Digite seu nome completo" id="nome" name="nome" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors" type="text" required />
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='email'>
-              EMAIL
-            </label>
-            <input
-              placeholder='Digite seu email'
-              id='email'
-              name='email'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors'
-              type='email'
-              required
-            />
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="email">EMAIL</label>
+            <input placeholder="Digite seu email" id="email" name="email" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors" type="email" required />
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='data_nascimento'>
-              DATA DE NASCIMENTO
-            </label>
-            <input
-              id='data_nascimento'
-              name='data_nascimento'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors'
-              type='date'
-              required
-            />
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="data_nascimento">DATA DE NASCIMENTO</label>
+            <input id="data_nascimento" name="data_nascimento" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors" type="date" required />
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='hora_nascimento'>
-              HORÁRIO DE NASCIMENTO
-            </label>
-            <input
-              placeholder='Ex: 14:30'
-              id='hora_nascimento'
-              name='hora_nascimento'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors'
-              type='time'
-              required
-            />
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="hora_nascimento">HORÁRIO DE NASCIMENTO</label>
+            <input placeholder="Ex: 14:30" id="hora_nascimento" name="hora_nascimento" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors" type="time" required />
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='cidade_nascimento'>
-              CIDADE DE NASCIMENTO
-            </label>
-            <input
-              placeholder='Digite sua cidade de nascimento'
-              id='cidade_nascimento'
-              name='cidade_nascimento'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors'
-              type='text'
-              required
-            />
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="cidade_nascimento">CIDADE DE NASCIMENTO</label>
+            <input placeholder="Digite sua cidade de nascimento" id="cidade_nascimento" name="cidade_nascimento" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors" type="text" required />
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='questoes_principais'>
-              QUESTÕES PRINCIPAIS
-            </label>
-            <textarea
-              placeholder='Descreva as questões ou aspectos da vida que gostaria de explorar...'
-              id='questoes_principais'
-              name='questoes_principais'
-              rows='4'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors resize-vertical'
-              required
-            ></textarea>
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="questoes_principais">QUESTÕES PRINCIPAIS</label>
+            <textarea placeholder="Descreva as questões ou aspectos da vida que gostaria de explorar..." id="questoes_principais" name="questoes_principais" rows="4" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors resize-vertical" required></textarea>
           </div>
-
-          <div class='form_group'>
-            <label class='sub_title heading-font font-black text-black text-lg mb-2 block' for='experiencias_passadas'>
-              EXPERIÊNCIAS RELEVANTES
-            </label>
-            <textarea
-              placeholder='Compartilhe experiências que considera importantes para sua jornada...'
-              id='experiencias_passadas'
-              name='experiencias_passadas'
-              rows='4'
-              class='form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors resize-vertical'
-            ></textarea>
+          <div class="form_group">
+            <label class="sub_title heading-font font-black text-black text-lg mb-2 block" for="experiencias_passadas">EXPERIÊNCIAS RELEVANTES</label>
+            <textarea placeholder="Compartilhe experiências que considera importantes para sua jornada..." id="experiencias_passadas" name="experiencias_passadas" rows="4" class="form_style w-full px-4 py-3 border-4 border-black font-bold text-black bg-white brutal-pill focus:outline-none focus:bg-secondary transition-colors resize-vertical"></textarea>
           </div>
-
-          <div class='text-center pt-4'>
-            <button
-              type='submit'
-              class='btn brutal-button bg-deep border-4 border-black text-white font-black text-xl px-8 py-4 hover:bg-accent hover:text-black transition-colors w-full md:w-auto'
-            >
-              ENVIAR MAPA ASTRAL
-            </button>
-
-            <p class='body-font text-black text-sm mt-6 opacity-80'>
-              Suas informações serão tratadas com total confidencialidade e usadas apenas para criar seu mapa astral personalizado.
-            </p>
+          <div class="text-center pt-4">
+            <button type="submit" id="submit-button" class="btn brutal-button bg-deep border-4 border-black text-white font-black text-xl px-8 py-4 hover:bg-accent hover:text-black transition-colors w-full md:w-auto">GERAR MAPA ASTRAL</button>
+            <div id="loading-spinner" class="hidden mx-auto mt-6 w-12 h-12 border-8 border-dashed rounded-full animate-spin border-black"></div>
+            <p id="form-error" class="body-font text-red-600 font-bold text-lg mt-4 hidden"></p>
+            <p class="body-font text-black text-sm mt-6 opacity-80">Suas informações serão tratadas com total confidencialidade.</p>
           </div>
         </form>
+
+        <!-- Result Containers -->
+        <div id="result-container" class="hidden mt-12">
+          <h2 class="title heading-font text-black font-black text-3xl mb-6 text-center">Seu Resultado</h2>
+          <div id="svg-result" class="brutal-card border-4 border-black mb-8"></div>
+          <div class="brutal-card bg-primary border-4 border-black p-6">
+            <h3 class="heading-font text-black font-black text-xl mb-4">Análise Detalhada</h3>
+            <pre id="json-result" class="body-font text-black bg-white p-4 border-2 border-black whitespace-pre-wrap break-words"></pre>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -194,38 +130,77 @@ import { Button } from '@eliancodes/brutal-ui';
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('astral-form');
+  document.addEventListener('astro:page-load', function () {
+    const form = document.getElementById('astral-form');
+    const submitButton = document.getElementById('submit-button');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const resultContainer = document.getElementById('result-container');
+    const svgResult = document.getElementById('svg-result');
+    const jsonResult = document.getElementById('json-result');
+    const formError = document.getElementById('form-error');
 
-  if (form) {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+        submitButton.disabled = true;
+        loadingSpinner.classList.remove('hidden');
+        resultContainer.classList.add('hidden');
+        formError.classList.add('hidden');
+        formError.textContent = '';
 
-      try {
-        // TODO: Replace with actual API endpoint from /Users/gabrielramos/api-psicologa
-        const response = await fetch('/api/mapa-astral', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-        if (response.ok) {
-          // Show success message
-          alert('Mapa Astral enviado com sucesso! Em breve você receberá sua análise personalizada.');
-          form.reset();
-        } else {
-          throw new Error('Erro ao enviar formulário');
+        try {
+          const response = await fetch('/api/mapa-astral', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+
+          const responseData = await response.json();
+
+          if (response.ok) {
+            // Safely render JSON data
+            jsonResult.textContent = JSON.stringify(responseData.jsonData, null, 2);
+
+            // Clear previous SVG and safely parse and append the new one
+            svgResult.innerHTML = ''; // Clear previous content
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(responseData.svgData, 'image/svg+xml');
+            const sanitizedSvg = svgDoc.documentElement;
+
+            // Basic sanitization: remove script tags
+            const scripts = sanitizedSvg.getElementsByTagName('script');
+            while (scripts.length > 0) {
+              scripts[0].parentNode.removeChild(scripts[0]);
+            }
+
+            svgResult.appendChild(sanitizedSvg);
+            
+            resultContainer.classList.remove('hidden');
+            form.reset();
+          } else {
+            let errorMessage = 'Erro de validação. Verifique os campos.';
+            if (responseData.errors) {
+              const firstErrorField = Object.keys(responseData.errors)[0];
+              errorMessage = responseData.errors[firstErrorField][0];
+            }
+            formError.textContent = errorMessage;
+            formError.classList.remove('hidden');
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+          formError.textContent = 'Ocorreu um erro ao enviar o formulário. Tente novamente.';
+          formError.classList.remove('hidden');
+        } finally {
+          submitButton.disabled = false;
+          loadingSpinner.classList.add('hidden');
         }
-      } catch (error) {
-        console.error('Erro:', error);
-        alert('Ocorreu um erro ao enviar o formulário. Tente novamente em alguns instantes.');
-      }
-    });
-  }
-});
+      });
+    }
+  });
 </script>
