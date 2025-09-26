@@ -8,7 +8,7 @@
 /* ---- 🔨 BRUTAL STYLING 🔨 ---- */
 .brutal-card {
   filter: drop-shadow(12px 12px 0 rgb(0 0 0 / 1));
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: filter 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border-style: solid;
 }
 
@@ -19,7 +19,7 @@
 
 .brutal-pill {
   filter: drop-shadow(4px 4px 0 rgb(0 0 0 / 1));
-  transition: all 0.2s ease-in-out;
+  transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out;
   border-style: solid;
 }
 
@@ -30,7 +30,7 @@
 
 .brutal-button {
   filter: drop-shadow(6px 6px 0 rgb(0 0 0 / 1));
-  transition: all 0.2s ease-in-out;
+  transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out;
   border-style: solid !important;
   font-weight: 900 !important;
   text-transform: uppercase;
@@ -66,9 +66,7 @@
 
 .card-shadow {
   filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
-  transition: all;
-  transition-duration: 0.5s;
-  animation: ease-in-out;
+  transition: filter 0.5s ease-in-out;
 }
 .card-shadow:hover {
   filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 1));
