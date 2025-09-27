@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # .coderabbit.yaml
 # =============================================================================
 # GLOBAL SETTINGS
@@ -33,11 +34,16 @@ reviews:
   auto_assign_reviewers: false
   poem: true
   labeling_instructions:
-    - "Add 'content' label for changes to blog posts or astrology content"
-    - "Add 'security' label for security-related changes, especially in API endpoints"
-    - "Add 'ui/ux' label for component or styling changes"
-    - "Add 'astro' label for Astro framework-specific changes"
-    - "Add 'api' label for backend/API changes"
+    - label: "content"
+      instructions: "Apply when changes affect blog posts, astrology content, or markdown files in src/content/"
+    - label: "security"
+      instructions: "Apply for security-related changes, especially in API endpoints, validation, or authentication"
+    - label: "ui/ux"
+      instructions: "Apply for component changes, styling updates, or user interface modifications"
+    - label: "astro"
+      instructions: "Apply for Astro framework-specific changes like components, layouts, or configuration"
+    - label: "api"
+      instructions: "Apply for backend/API changes in src/pages/api/ or server-side functionality"
   path_filters: []
   path_instructions:
     - path: "src/content/blog/*.md"
