@@ -34,8 +34,25 @@ export const POST: APIRoute = async ({ request }) => {
     // --- A LÓGICA REAL DA API VIRIA AQUI ---
     // Por enquanto, apenas simulamos o sucesso se a validação passar.
 
+    const mockJsonData = {
+      signo: "Leão",
+      ascendente: "Áries",
+      lua: "Sagitário",
+      mensagem: "Você é uma pessoa de personalidade forte e impulsiva, com um coração generoso.",
+      data: validationResult.data.nome,
+    };
+
+    const mockSvgData = `
+      <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <rect x="4" y="4" width="calc(100% - 8px)" height="calc(100% - 8px)" fill="#BFFF00" stroke="#000" stroke-width="8" />
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="24" font-weight="bold" fill="#000">SIGNO: ${mockJsonData.signo}</text>
+        <text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#000">Ascendente: ${mockJsonData.ascendente}</text>
+      </svg>
+    `;
+
     return new Response(JSON.stringify({
-      message: 'Dados recebidos e validados com sucesso! Em breve você receberá seu mapa astral.'
+      jsonData: mockJsonData,
+      svgData: mockSvgData,
     }), {
       status: 200,
       headers: {
