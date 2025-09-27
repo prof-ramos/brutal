@@ -32,9 +32,20 @@ reviews:
   suggested_reviewers: true
   auto_assign_reviewers: false
   poem: true
-  labeling_instructions: []
+  labeling_instructions:
+    - "Add 'content' label for changes to blog posts or astrology content"
+    - "Add 'security' label for security-related changes, especially in API endpoints"
+    - "Add 'ui/ux' label for component or styling changes"
+    - "Add 'astro' label for Astro framework-specific changes"
+    - "Add 'api' label for backend/API changes"
   path_filters: []
-  path_instructions: []
+  path_instructions:
+    - path: "src/content/blog/*.md"
+      instructions: "Focus on astrological content quality, humor tone, and Portuguese language accuracy. Ensure content maintains the comedic 'Psicóloga em Outra Dimensão' persona."
+    - path: "src/components/**"
+      instructions: "Review for Astro component best practices, TypeScript usage, and neo-brutalist design consistency."
+    - path: "src/pages/api/**"
+      instructions: "Focus on API security, validation, and proper error handling for astrology-related endpoints."
   abort_on_close: true
   disable_cache: false
   auto_review:

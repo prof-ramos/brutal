@@ -3,18 +3,19 @@ import LocalFont from '../generic/LocalFont.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   ogImage?: URL;
 }
 
+const {
+  title = 'Psicóloga em outra dimensão',
+  description = 'Um espaço de reflexões pessoais e escritas fora do comum.',
+  ogImage = new URL('https://brutal-nu-one.vercel.app/preview.png', Astro.site),
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-if (Astro.props.ogImage === undefined) {
-  Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
-}
-
-const { title, description, ogImage } = Astro.props;
+const siteTitle = title === 'Psicóloga em outra dimensão' ? title : `${title} | Psicóloga em outra dimensão`;
 ---
 
 <head>
@@ -23,31 +24,28 @@ const { title, description, ogImage } = Astro.props;
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <meta name='generator' content={Astro.generator} />
 
-   <link
-     rel='alternate'
-     href='/blog.xml'
-     type='application/rss+xml'
-   />
+  <link rel='alternate' href='/blog.xml' type='application/rss+xml' />
 
-   <meta name='title' content={`Psicóloga em Outra Dimensão | ${title}`} />
+  <!-- SEO & General -->
+  <title>{siteTitle}</title>
+  <meta name='title' content={siteTitle} />
   <meta name='description' content={description} />
-
-  <meta property='og:type' content='website' />
-  <meta property='og:url' content={canonicalURL} />
-  <meta property='og:title' content={title} />
-  <meta property='og:description' content={description} />
-  <meta property='og:image' content={ogImage} />
-
-  <meta property='twitter:card' content='summary_large_image' />
-  <meta property='twitter:url' content={canonicalURL} />
-  <meta property='twitter:title' content={title} />
-  <meta property='twitter:description' content={description} />
-  <meta property='twitter:image' content={ogImage} />
-
   <link rel='canonical' href={canonicalURL} />
   <link rel='icon' type='image/svg' href='/favicon.svg' />
 
-   <title>Psicóloga em Outra Dimensão | {title}</title>
+  <!-- Open Graph (Facebook, WhatsApp, etc.) -->
+  <meta property='og:title' content={siteTitle} />
+  <meta property='og:description' content={description} />
+  <meta property='og:url' content={canonicalURL} />
+  <meta property='og:image' content={ogImage.toString()} />
+  <meta property='og:type' content='website' />
+
+  <!-- Twitter -->
+  <meta property='twitter:card' content='summary_large_image' />
+  <meta property='twitter:url' content={canonicalURL} />
+  <meta property='twitter:title' content={siteTitle} />
+  <meta property='twitter:description' content={description} />
+  <meta property='twitter:image' content={ogImage.toString()} />
 
   <ViewTransitions />
 
