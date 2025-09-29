@@ -18,9 +18,9 @@ export default defineConfig({
     },
     define: {
       // Make TinaCMS environment variables available in the client
-      'import.meta.env.PUBLIC_TINA_CLIENT_ID': JSON.stringify(process.env.NEXT_PUBLIC_TINA_CLIENT_ID),
-      'import.meta.env.TINA_TOKEN': JSON.stringify(process.env.TINA_TOKEN),
-      'import.meta.env.PUBLIC_TINA_BRANCH': JSON.stringify(process.env.TINA_BRANCH || 'main'),
+      'process.env.NEXT_PUBLIC_TINA_CLIENT_ID': JSON.stringify(process.env.NEXT_PUBLIC_TINA_CLIENT_ID),
+      'process.env.TINA_TOKEN': JSON.stringify(process.env.TINA_TOKEN),
+      'process.env.TINA_PUBLIC_IS_LOCAL': JSON.stringify(process.env.TINA_PUBLIC_IS_LOCAL),
     },
   },
   server: {
