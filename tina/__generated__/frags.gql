@@ -1,0 +1,22 @@
+fragment BlogParts on Blog {
+  __typename
+  title
+  description
+  pubDate
+  updatedDate
+  author
+  category
+  tags
+  readingTime
+  difficulty
+  heroImage
+  heroImageAlt
+  draft
+  featured
+  zodiacSign
+  targetAudience
+  humorLevel
+  relatedSigns
+  relatedPosts
+  body
+}

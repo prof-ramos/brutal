@@ -16,15 +16,21 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
     },
+    define: {
+      // Make TinaCMS environment variables available in the client
+      'import.meta.env.PUBLIC_TINA_CLIENT_ID': JSON.stringify(process.env.NEXT_PUBLIC_TINA_CLIENT_ID),
+      'import.meta.env.TINA_TOKEN': JSON.stringify(process.env.TINA_TOKEN),
+      'import.meta.env.PUBLIC_TINA_BRANCH': JSON.stringify(process.env.TINA_BRANCH || 'main'),
+    },
   },
   server: {
     headers: {
-      'X-Frame-Options': 'DENY',
+      'X-Frame-Options': 'SAMEORIGIN', // Changed from DENY to allow TinaCMS iframe
       'X-Content-Type-Options': 'nosniff',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
       'Content-Security-Policy':
-        "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;",
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.tina.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://app.tina.io; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://app.tina.io; connect-src 'self' https://app.tina.io https://graphql.tina.io https://content.tinajs.io;",
     },
   },
 });
