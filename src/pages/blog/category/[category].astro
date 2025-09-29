@@ -1,63 +1,62 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
-import BlogFilters from '@components/blog/BlogFilters.astro';
+import Layout from '@layouts/Default.astro'
+import BlogList from '@components/blog/BlogList.astro'
+import BlogFilters from '@components/blog/BlogFilters.astro'
+import {getAllPosts, type SanityPost} from '@lib/sanity'
+
+interface PathContext {
+  posts: SanityPost[]
+  allPosts: SanityPost[]
+  category: string
+  categoryLabel: string
+}
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const allPosts = await getAllPosts()
+  const categoryMap = new Map<string, {label: string; posts: SanityPost[]}>()
 
-  const categories = [...new Set(posts
-    .map(post => post.data.category)
-    .filter(Boolean)
-  )];
+  allPosts.forEach((post) => {
+    post.categories?.forEach((category) => {
+      if (!category?.slug) return
+      const entry = categoryMap.get(category.slug)
+      if (entry) {
+        entry.posts.push(post)
+      } else {
+        categoryMap.set(category.slug, {
+          label: category.title ?? category.slug,
+          posts: [post],
+        })
+      }
+    })
+  })
 
-  return categories.map((category) => ({
-    params: { category },
+  return Array.from(categoryMap.entries()).map(([slug, data]) => ({
+    params: {category: slug},
     props: {
-      posts: posts.filter(post => post.data.category === category),
-      allPosts: posts,
-      category
+      posts: data.posts,
+      allPosts,
+      category: slug,
+      categoryLabel: data.label,
     },
-  }));
+  }))
 }
 
-interface Props {
-  posts: any[];
-  allPosts: any[];
-  category: string;
-}
+const {posts: categoryPosts, allPosts, category, categoryLabel}: PathContext = Astro.props
 
-const { posts, allPosts, category } = Astro.props;
-
-// Category translations
-const categoryLabels: Record<string, string> = {
-  'cognitive-psychology': 'Psicologia Cognitiva',
-  'behavioral-psychology': 'Psicologia Comportamental',
-  'clinical-psychology': 'Psicologia Clínica',
-  'developmental-psychology': 'Psicologia do Desenvolvimento',
-  'social-psychology': 'Psicologia Social',
-  'neuropsychology': 'Neuropsicologia',
-  'positive-psychology': 'Psicologia Positiva',
-  'therapy-techniques': 'Técnicas Terapêuticas',
-  'mental-health': 'Saúde Mental',
-  'research-insights': 'Pesquisas e Estudos',
-  'case-studies': 'Estudos de Caso',
-  'wellness-tips': 'Dicas de Bem-estar'
-};
-
-const categoryLabel = categoryLabels[category] || category;
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const sortedPosts = [...categoryPosts].sort((a, b) => {
+  const dateA = new Date(a.publishedAt ?? a.updatedAt ?? 0).getTime()
+  const dateB = new Date(b.publishedAt ?? b.updatedAt ?? 0).getTime()
+  return dateB - dateA
+})
 ---
 
 <Layout
-  title={`${categoryLabel} | Blog de Psicologia`}
-  description={`Explore artigos sobre ${categoryLabel.toLowerCase()} em nosso blog especializado em psicologia e saúde mental.`}
+  title={`${categoryLabel} | Blog de Astrologia`}
+  description={`Explore artigos sobre ${categoryLabel.toLowerCase()} no blog da Psicóloga em Outra Dimensão.`}
   pageTitle={`Categoria: ${categoryLabel}`}
 >
   <main class="bg-primary p-6 min-h-screen">
     <div class="max-w-6xl mx-auto">
-      <!-- Header -->
       <div class="mb-8">
         <nav class="mb-4">
           <a href="/blog" class="text-blue-600 hover:text-blue-800 transition-colors">
@@ -70,14 +69,12 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
         </h1>
 
         <p class="text-xl text-gray-700 max-w-2xl">
-          {posts.length} {posts.length === 1 ? 'artigo encontrado' : 'artigos encontrados'} nesta categoria.
+          {sortedPosts.length} {sortedPosts.length === 1 ? 'artigo encontrado' : 'artigos encontrados'} nesta categoria.
         </p>
       </div>
 
-      <!-- Filters -->
       <BlogFilters posts={allPosts} currentCategory={category} />
 
-      <!-- Posts -->
       {sortedPosts.length > 0 ? (
         <BlogList posts={sortedPosts} />
       ) : (

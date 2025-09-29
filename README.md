@@ -118,6 +118,8 @@ pnpm sanity deploy
 
 > Dica: revise os componentes em `src/components` que ainda usam `astro:content`. Substitua gradualmente por chamadas ao cliente Sanity (`src/lib/sanity.ts`) para servir o conteúdo diretamente do CMS.
 
+Os posts do blog agora são renderizados diretamente a partir do Sanity. Assim que uma entrada é publicada no Studio ela aparece nas rotas `/blog`, nas listagens recentes e no feed RSS sem necessidade de editar arquivos Markdown locais.
+
 ### Comandos Disponíveis
 
 | Comando             | Ação                                               |
@@ -146,7 +148,7 @@ pnpm sanity deploy
 ```
 src/
 ├── components/
-├── content/      # Conteúdo local (Markdown)
+├── content/      # Conteúdo local (Markdown legacy / exemplos)
 ├── layouts/
 ├── pages/
 │   ├── api/

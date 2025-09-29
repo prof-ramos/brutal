@@ -1,53 +1,53 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
-import { Button } from '@eliancodes/brutal-ui';
+import Layout from '@layouts/Default.astro'
+import BlogList from '@components/blog/BlogList.astro'
+import {Button} from '@eliancodes/brutal-ui'
+import {getAllPosts, type SanityPost} from '@lib/sanity'
+
+function tagToSlug(tag: string) {
+  return tag.toLowerCase().replace(/\s+/g, '-')
+}
+
+interface PathContext {
+  tag: string
+  posts: SanityPost[]
+  slug: string
+}
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog').then((collection) =>
-    collection.reverse()
-  );
+  const posts = await getAllPosts()
+  const tagMap = new Map<string, PathContext>()
 
-  const tags: string[] = [];
+  posts.forEach((post) => {
+    (post.tags ?? []).forEach((tag) => {
+      const slug = tagToSlug(tag)
+      const entry = tagMap.get(slug)
+      if (entry) {
+        entry.posts.push(post)
+      } else {
+        tagMap.set(slug, {tag, slug, posts: [post]})
+      }
+    })
+  })
 
-  allPosts.forEach((post) => {
-    post.data.tags.forEach((tag) => {
-      tags.push(tag.toLowerCase());
-    });
-  });
-
-  return Array.from(new Set(tags)).map((tag) => {
-    return {
-      params: { tag },
-      props: {
-        tag,
-        blogposts: allPosts.filter((post) =>
-          post.data.tags.map((tag) => tag.toLowerCase()).includes(tag)
-        ),
-      },
-    };
-  });
+  return Array.from(tagMap.values()).map((entry) => ({
+    params: {tag: entry.slug},
+    props: entry,
+  }))
 }
 
-interface Props {
-  tag: string;
-  blogposts: CollectionEntry<'blog'>[];
-}
-
-const { tag, blogposts } = Astro.props;
+const {tag, posts: tagPosts}: PathContext = Astro.props
 ---
 
 <Layout
   title={`Blog: ${tag}`}
-  description={`Brutal Blog | All posts tagged with ${tag}`}
+  description={`Brutal Blog | Posts marcados com ${tag}`}
   pageTitle={`Brutal Blog | Blogposts tagged with ${tag}`}
 >
   <main class='p-6 bg-purple grid gap-4'>
     <div>
       <Button href='/blog/'>&larr; Back to blog</Button>
     </div>
-    <BlogList posts={blogposts} />
+    <BlogList posts={tagPosts} />
   </main>
 </Layout>

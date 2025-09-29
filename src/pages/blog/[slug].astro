@@ -1,29 +1,37 @@
 ---
-import { type CollectionEntry, render, getCollection } from 'astro:content';
-import Layout from '@layouts/BlogPost.astro';
+import Layout from '@layouts/BlogPost.astro'
+import {portableTextToHtml} from '@lib/portableText'
+import {getAllPosts, getPostBySlug} from '@lib/sanity'
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map((blogpost) => ({
-    params: { slug: blogpost.id },
-    props: { blogpost },
-  }));
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    params: {slug: post.slug},
+  }))
 }
 
 interface Props {
-  blogpost: CollectionEntry<'blog'>;
+  slug: string;
 }
 
-const { blogpost } = Astro.props;
-const { Content } = await render(blogpost);
+const {slug} = Astro.props
+const post = await getPostBySlug(slug)
+
+if (!post) {
+  throw new Error(`Post not found for slug: ${slug}`)
+}
+
+const bodyHtml = portableTextToHtml(post.body ?? [])
+const authorName = post.author?.name ?? 'Psicóloga em Outra Dimensão'
+const pubDate = post.publishedAt ? new Date(post.publishedAt) : new Date()
 ---
 
 <Layout
-  title={blogpost.data.title}
-  description={blogpost.data.description}
-  pubDate={blogpost.data.pubDate}
-  author={blogpost.data.author}
-  headings={blogpost.rendered?.metadata?.headings}
+  title={post.title}
+  description={post.description ?? ''}
+  pubDate={pubDate}
+  author={authorName}
+  headings={[]}
 >
-  <Content />
+  <div class='portable-text' set:html={bodyHtml} />
 </Layout>
