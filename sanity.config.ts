@@ -8,8 +8,8 @@ export default defineConfig({
   name: 'brutal-astrology-blog',
   title: 'Brutal Astrology Blog',
 
-  projectId: 'your-project-id', // Replace with your Sanity project ID
-  dataset: 'production',
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: import.meta.env.SANITY_STUDIO_DATASET,
 
   plugins: [
     structureTool(),
