@@ -1,18 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogList from '../blog/BlogList.astro';
-import { Card } from '@eliancodes/brutal-ui';
-import { Button } from '@eliancodes/brutal-ui';
+import BlogList from '../blog/BlogList.astro'
+import {Card, Button} from '@eliancodes/brutal-ui'
+import {getAllPosts} from '@lib/sanity'
 
 interface Props {
   count?: number;
 }
 
-const { count } = Astro.props;
-
-const posts = await getCollection('blog').then((posts) =>
-  posts.reverse().slice(0, count ?? 3)
-);
+const {count} = Astro.props
+const posts = (await getAllPosts()).slice(0, count ?? 3)
 ---
 
 <section class='mt-8'>

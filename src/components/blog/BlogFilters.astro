@@ -1,33 +1,40 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type {SanityPost} from '@lib/sanity'
 
 interface Props {
-  posts: CollectionEntry<'blog'>[];
+  posts: SanityPost[];
   currentCategory?: string;
   currentTags?: string[];
 }
 
-const { posts, currentCategory, currentTags = [] } = Astro.props;
+const {posts, currentCategory, currentTags = []} = Astro.props;
 
-// Extract unique categories and tags from all posts
-const categories = [...new Set(posts
-  .map(post => post.data.category)
-  .filter(Boolean)
-  .sort()
-)];
+const categoryMap = new Map<string, string>()
+posts.forEach((post) => {
+  post.categories?.forEach((category) => {
+    if (!category?.slug) return
+    if (!categoryMap.has(category.slug)) {
+      categoryMap.set(category.slug, category.title ?? category.slug)
+    }
+  })
+})
 
-const allTags = [...new Set(posts
-  .flatMap(post => post.data.tags || [])
-  .sort()
-)];
+const categories = Array.from(categoryMap.entries()).sort((a, b) =>
+  a[1].localeCompare(b[1], 'pt-BR', {sensitivity: 'base'})
+)
 
-const popularTags = allTags.slice(0, 15); // Show most common tags
+const allTags = Array.from(
+  new Set(
+    posts.flatMap((post) => post.tags ?? [])
+  )
+).sort((a, b) => a.localeCompare(b, 'pt-BR', {sensitivity: 'base'}))
+
+const popularTags = allTags.slice(0, 15)
 ---
 
 <div class="bg-white border-4 border-black p-6 mb-8">
   <h3 class="text-2xl font-bold mb-4 heading-font">Filtrar Artigos</h3>
 
-  <!-- Categories Filter -->
   <div class="mb-6">
     <h4 class="text-lg font-bold mb-2">Categorias</h4>
     <div class="flex flex-wrap gap-2">
@@ -41,43 +48,25 @@ const popularTags = allTags.slice(0, 15); // Show most common tags
       >
         Todas
       </a>
-      {categories.map(category => {
-        const categoryLabel = {
-          'cognitive-psychology': 'Psicologia Cognitiva',
-          'behavioral-psychology': 'Psicologia Comportamental',
-          'clinical-psychology': 'Psicologia Clínica',
-          'developmental-psychology': 'Psicologia do Desenvolvimento',
-          'social-psychology': 'Psicologia Social',
-          'neuropsychology': 'Neuropsicologia',
-          'positive-psychology': 'Psicologia Positiva',
-          'therapy-techniques': 'Técnicas Terapêuticas',
-          'mental-health': 'Saúde Mental',
-          'research-insights': 'Pesquisas',
-          'case-studies': 'Estudos de Caso',
-          'wellness-tips': 'Bem-estar'
-        }[category] || category;
-
-        return (
-          <a
-            href={`/blog/category/${category}`}
-            class={`px-3 py-1 border-2 border-black transition-colors ${
-              currentCategory === category
-                ? 'bg-black text-white'
-                : 'bg-white text-black hover:bg-black hover:text-white'
-            }`}
-          >
-            {categoryLabel}
-          </a>
-        );
-      })}
+      {categories.map(([slug, label]) => (
+        <a
+          href={`/blog/category/${slug}`}
+          class={`px-3 py-1 border-2 border-black transition-colors ${
+            currentCategory === slug
+              ? 'bg-black text-white'
+              : 'bg-white text-black hover:bg-black hover:text-white'
+          }`}
+        >
+          {label}
+        </a>
+      ))}
     </div>
   </div>
 
-  <!-- Tags Filter -->
   <div class="mb-6">
     <h4 class="text-lg font-bold mb-2">Tags Populares</h4>
     <div class="flex flex-wrap gap-2">
-      {popularTags.map(tag => (
+      {popularTags.map((tag) => (
         <a
           href={`/blog/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
           class={`px-3 py-1 border-2 border-black text-sm transition-colors ${
@@ -92,16 +81,15 @@ const popularTags = allTags.slice(0, 15); // Show most common tags
     </div>
   </div>
 
-  <!-- Difficulty Filter -->
   <div class="mb-4">
     <h4 class="text-lg font-bold mb-2">Nível</h4>
     <div class="flex gap-2">
-      {['beginner', 'intermediate', 'advanced'].map(level => {
+      {['beginner', 'intermediate', 'advanced'].map((level) => {
         const levelLabel = {
-          'beginner': 'Iniciante',
-          'intermediate': 'Intermediário',
-          'advanced': 'Avançado'
-        }[level];
+          beginner: 'Iniciante',
+          intermediate: 'Intermediário',
+          advanced: 'Avançado',
+        }[level]
 
         return (
           <a
@@ -110,7 +98,7 @@ const popularTags = allTags.slice(0, 15); // Show most common tags
           >
             {levelLabel}
           </a>
-        );
+        )
       })}
     </div>
   </div>
