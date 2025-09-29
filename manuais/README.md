@@ -38,9 +38,9 @@ Este diretório contém todos os manuais necessários para trabalhar com o site 
 3. Configure [Fluxos de Trabalho](/manuais/editor/03-workflows.md)
 
 ### Para Desenvolvedores
-1. Configure o [Ambiente Técnico](/manuais/desenvolvedor/01-setup.md)
-2. Entenda a [Arquitetura](/manuais/desenvolvedor/02-arquitetura.md)
-3. Implemente [Customizações](/manuais/desenvolvedor/03-customizacao.md)
+1. Aprenda sobre a [Admin Page](/manuais/desenvolvedor/01-admin-page-manual.md)
+2. Verifique o [CMS e Sanity com DevTools](/manuais/desenvolvedor/02-verificacao-cms.md)
+3. Configure [Deploy no Vercel](/manuais/desenvolvedor/03-vercel-deployment.md)
 
 ## 🆘 Suporte
 
