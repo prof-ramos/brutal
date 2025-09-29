@@ -1,0 +1,13 @@
+{
+  "framework": "astro",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "regions": ["iad1", "sfo1"],
+  "rewrites": [
+    {
+      "source": "/api/proxy/(.*)",
+      "destination": "https://api.example.com/$1"
+    }
+  ]
+}
