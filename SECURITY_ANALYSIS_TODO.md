@@ -1,9 +1,6 @@
-- [x] Define the audit scope.
-- [x] SAST Recon on `src/components/layout/BaseHead.astro`.
-  - [x] Investigate data flow from `title` on line 11.
-  - [x] Investigate data flow from `description` on line 12.
-  - [x] Investigate data flow from `ogImage` on line 13.
-- [x] SAST Recon on `src/pages/api/mapa-astral.ts`.
-- [x] SAST Recon on `src/pages/mapa-astral.astro`.
-  - [x] Investigate data flow from `responseData.svgData` on line 201.
+- [ ] Define the audit scope.
+- [ ] SAST Recon on GEMINI.md
+- [ ] SAST Recon on README.md
+- [ ] SAST Recon on sanity.config.ts
+- [ ] SAST Recon on .gitignore
 - [ ] Conduct the final review of all findings as per your **Minimizing False Positives** operating principle and generate the final report.
