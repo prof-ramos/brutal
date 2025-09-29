@@ -1,9 +1,9 @@
 ---
-import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
-import { getAllPosts } from '@lib/sanity';
+import Layout from '@layouts/Default.astro'
+import BlogList from '@components/blog/BlogList.astro'
+import {getAllPosts} from '@lib/sanity'
 
-const posts = await getAllPosts();
+const posts = await getAllPosts()
 ---
 
 <Layout
