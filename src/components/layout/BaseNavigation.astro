@@ -4,34 +4,40 @@ interface Props {
 }
 
 const navigationItems = [
-  { name: 'Home', url: '/' },
-  { name: 'Blog', url: '/blog/' },
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog/" },
 ];
 
 const socialIcons = [
   {
-    name: 'Twitter',
-    url: 'https://x.com/Gayaliz_',
-    icon: 'i-uil-twitter',
+    name: "Twitter",
+    url: "https://x.com/Gayaliz_",
+    icon: "i-uil-twitter",
   },
 ];
 
 const { pageTitle } = Astro.props;
 ---
 
-<header class='bg-secondary border-b-8 border-black flex justify-between p-6 items-center brutal-card'>
-  {pageTitle && <h1 class='hidden'>{pageTitle}</h1>}
-  <a href='/' title='Voltar ao Início' class='brutal-button bg-deep border-4 border-black text-white px-4 py-2'>
-    <p class='righteous text-lg md:text-3xl font-black'>PSICÓLOGA</p>
+<header
+  class="bg-secondary border-b-8 border-black flex justify-between p-6 items-center brutal-card"
+>
+  {pageTitle && <h1 class="sr-only">{pageTitle}</h1>}
+  <a
+    href="/"
+    title="Voltar ao Início"
+    class="brutal-button bg-deep border-4 border-black text-white px-4 py-2"
+  >
+    <p class="righteous text-lg md:text-3xl font-black">PSICÓLOGA</p>
   </a>
-  <nav class='hidden md:inline-block'>
-    <h2 class='hidden'>Navigation</h2>
-    <ul class='flex gap-6 poppins'>
+  <nav class="hidden md:inline-block">
+    <h2 class="sr-only">Navigation</h2>
+    <ul class="flex gap-6 poppins">
       {
         navigationItems.map((item) => (
           <li>
             <a
-              class='brutal-pill bg-accent border-3 border-black text-black font-black text-sm px-4 py-2 hover:bg-tertiary transition-colors uppercase tracking-wider'
+              class="brutal-pill bg-accent border-3 border-black text-black font-black text-sm px-4 py-2 hover:bg-tertiary transition-colors uppercase tracking-wider"
               href={item.url}
               title={`Ir para ${item.name}`}
             >
@@ -45,22 +51,37 @@ const { pageTitle } = Astro.props;
           <li>
             <a
               href={item.url}
-              class='brutal-pill bg-primary border-3 border-black p-3 hover:bg-tertiary transition-colors'
-              target='_blank'
+              class="brutal-pill bg-primary border-3 border-black p-3 hover:bg-tertiary transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
               title={`Visite nosso ${item.name}`}
             >
-              <div class:list={[item.icon, 'w-5 h-5 text-black']} />
+              <div class:list={[item.icon, "w-5 h-5 textc-black"]} aria-hidden="true" />
+              <span class="sr-only">Visite nosso {item.name}</span>
             </a>
           </li>
         ))
       }
     </ul>
   </nav>
-  <nav class='md:hidden flex gap-2'>
-    <h2 class='hidden'>Mobile Navigation</h2>
-    <ul class='flex gap-2'>
-      <li><a href='/blog/' class='brutal-pill bg-accent border-2 border-black text-black font-black px-3 py-1 text-sm flex items-center gap-2'><div class='i-uil-book-open'></div> BLOG</a></li>
-      <li><a href='/admin' class='brutal-pill bg-tertiary border-2 border-black text-black font-black px-3 py-1 text-sm'><div class='i-uil-setting'></div></a></li>
+  <nav class="md:hidden flex gap-2">
+    <h2 class="sr-only">Mobile Navigation</h2>
+    <ul class="flex gap-2">
+      <li>
+        <a
+          href="/blog/"
+          class="brutal-pill bg-accent border-2 border-black text-black font-black px-3 py-1 text-sm flex items-center gap-2"
+          ><div class="i-uil-book-open"></div> BLOG</a>
+      </li>
+      <li>
+        <a
+          href="/admin"
+          class="brutal-pill bg-tertiary border-2 border-black text-black font-black px-3 py-1 text-sm flex items-center justify-center"
+        >
+          <div class="i-uil-setting" aria-hidden="true"></div>
+          <span class="sr-only">Painel administrativo</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

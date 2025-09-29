@@ -9,13 +9,19 @@ const socials = [
 ---
 
 <section class='md:hidden'>
-  <h2 class='hidden'>Socials section</h2>
+  <h2 class='sr-only'>Socials section</h2>
   <ul class='flex justify-between'>
     {
       socials.map((item) => (
         <li class='bg-white px-4 py-2 text-green border-black border-2 rounded card-shadow'>
-          <a href={item.url} target='_blank' title={`Go to ${item.name}`}>
-            <div class:list={[item.icon, 'p-6']} />
+          <a
+            href={item.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            title={`Go to ${item.name}`}
+          >
+            <div class:list={[item.icon, 'p-6']} aria-hidden='true' />
+            <span class='sr-only'>Go to {item.name}</span>
           </a>
         </li>
       ))

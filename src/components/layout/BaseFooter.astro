@@ -13,6 +13,7 @@ const { backToTop = false } = Astro.props;
         backToTop ? `backToTop` : null,
         'transition-300 z-50 opacity-0 fixed flex bottom-[10px] right-[30px] w-10 h-10 bg-white border border-black card-shadow',
       ]}
+      type='button'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -22,6 +23,7 @@ const { backToTop = false } = Astro.props;
         width='100%'
         stroke-width='1.5'
         stroke='currentColor'
+        aria-hidden='true'
       >
         <path
           stroke-linecap='round'
@@ -29,12 +31,13 @@ const { backToTop = false } = Astro.props;
           d='m4.5 15.75 7.5-7.5 7.5 7.5'
         />
       </svg>
+      <span class='sr-only'>Voltar ao topo da página</span>
     </button>
   )
 }
 
 <footer class='bg-deep text-white p-8 border-t-8 border-secondary brutal-card'>
-  <h2 class='hidden'>Footer</h2>
+  <h2 class='sr-only'>Footer</h2>
   <div class='grid md:grid-cols-3 gap-6'>
     <div class='brutal-pill bg-tertiary border-4 border-black p-6'>
       <h3 class='font-black text-black text-xl mb-3 uppercase'>CONTATO</h3>

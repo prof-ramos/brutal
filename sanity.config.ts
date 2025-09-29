@@ -1,21 +1,17 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {colorInput} from '@sanity/color-input'
-import {schemaTypes} from './sanity/schemaTypes'
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
+import { colorInput } from "@sanity/color-input";
+import { schemaTypes } from "./sanity/schemaTypes";
 
 export default defineConfig({
-  name: 'brutal-astrology-blog',
-  title: 'Brutal Astrology Blog',
+  name: "brutal-astrology-blog",
+  title: "Brutal Astrology Blog",
 
-  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
-  dataset: import.meta.env.SANITY_STUDIO_DATASET,
+  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
+  dataset: import.meta.env.PUBLIC_SANITY_DATASET,
 
-  plugins: [
-    structureTool(),
-    visionTool(),
-    colorInput(),
-  ],
+  plugins: [structureTool(), visionTool(), colorInput()],
 
   schema: {
     types: schemaTypes,
@@ -25,6 +21,6 @@ export default defineConfig({
   studio: {
     components: {
       // You can customize the studio here
-    }
-  }
-})
+    },
+  },
+});

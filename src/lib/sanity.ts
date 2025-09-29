@@ -1,20 +1,25 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 // Sanity client configuration
+const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || "ocywki9g";
+const dataset = import.meta.env.PUBLIC_SANITY_DATASET || "production";
+
+console.log("Sanity config:", { projectId, dataset });
+
 export const client = createClient({
-  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
-  dataset: import.meta.env.PUBLIC_SANITY_DATASET || 'production',
+  projectId,
+  dataset,
   useCdn: true, // Enable CDN for faster response times
-  apiVersion: '2024-09-29', // Use current date or later
-})
+  apiVersion: "2024-09-29", // Use current date or later
+});
 
 // Image URL builder
-const builder = imageUrlBuilder(client)
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 // Common GROQ queries for the astrology blog
@@ -202,37 +207,37 @@ export const queries = {
     },
     specialties
   }`,
-}
+};
 
 // Helper functions
 export async function getAllPosts() {
-  return await client.fetch(queries.allPosts)
+  return await client.fetch(queries.allPosts);
 }
 
 export async function getPostBySlug(slug: string) {
-  return await client.fetch(queries.postBySlug, { slug })
+  return await client.fetch(queries.postBySlug, { slug });
 }
 
 export async function getPostsByZodiacSign(slug: string) {
-  return await client.fetch(queries.postsByZodiacSign, { slug })
+  return await client.fetch(queries.postsByZodiacSign, { slug });
 }
 
 export async function getPostsByCategory(categorySlug: string) {
-  return await client.fetch(queries.postsByCategory, { categorySlug })
+  return await client.fetch(queries.postsByCategory, { categorySlug });
 }
 
 export async function getFeaturedPosts() {
-  return await client.fetch(queries.featuredPosts)
+  return await client.fetch(queries.featuredPosts);
 }
 
 export async function getAllZodiacSigns() {
-  return await client.fetch(queries.allZodiacSigns)
+  return await client.fetch(queries.allZodiacSigns);
 }
 
 export async function getAllCategories() {
-  return await client.fetch(queries.allCategories)
+  return await client.fetch(queries.allCategories);
 }
 
 export async function getAllAuthors() {
-  return await client.fetch(queries.allAuthors)
+  return await client.fetch(queries.allAuthors);
 }
