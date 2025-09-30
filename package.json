@@ -16,13 +16,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "vitest",
     "sanity:dev": "sanity dev",
     "sanity:build": "sanity build",
     "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.12",
     "@astrojs/react": "^4.0.7",
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
     "@eliancodes/brutal-ui": "^0.2.6",
     "@sanity/astro": "^3.2.10",
@@ -55,6 +56,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.12.3",
     "sharp": "^0.32.6",
-    "unocss": "^0.57.7"
+    "unocss": "^0.57.7",
+    "vitest": "^3.2.4"
   }
 }

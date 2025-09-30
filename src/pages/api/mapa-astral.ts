@@ -5,7 +5,7 @@ import { z } from 'zod';
 const AstralFormSchema = z.object({
   nome: z.string().min(3, { message: 'O nome completo é obrigatório e deve ter no mínimo 3 caracteres.' }),
   email: z.string().email({ message: 'Por favor, insira um email válido.' }),
-  data_nascimento: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'A data de nascimento é obrigatória.' }),
+  data_nascimento: z.coerce.date().max(new Date(), { message: 'A data de nascimento não pode ser no futuro.' }),
   hora_nascimento: z.string().regex(/^\d{2}:\d{2}$/, { message: 'O horário de nascimento é obrigatório.' }),
   cidade_nascimento: z.string().min(2, { message: 'A cidade de nascimento é obrigatória.' }),
   questoes_principais: z.string().min(10, { message: 'Descreva suas questões principais com pelo menos 10 caracteres.' }),
