@@ -16,15 +16,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "vitest",
-    "sanity:dev": "sanity dev",
-    "sanity:build": "sanity build",
-    "sanity:deploy": "sanity deploy"
+    "test": "vitest"
   },
   "dependencies": {
     "@astrojs/react": "^4.0.7",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vercel": "^8.2.8",
     "@eliancodes/brutal-ui": "^0.2.6",
     "@unocss/astro": "^0.57.7",
     "@vercel/kv": "^3.0.0",

@@ -1,8 +1,8 @@
 ---
-import type {SanityPost} from '@lib/sanity'
+import type { BlogPost } from '@lib/posts'
 
 interface Props {
-  posts: SanityPost[];
+  posts: BlogPost[];
   currentCategory?: string;
   currentTags?: string[];
 }
@@ -11,12 +11,10 @@ const {posts, currentCategory, currentTags = []} = Astro.props;
 
 const categoryMap = new Map<string, string>()
 posts.forEach((post) => {
-  post.categories?.forEach((category) => {
-    if (!category?.slug) return
-    if (!categoryMap.has(category.slug)) {
-      categoryMap.set(category.slug, category.title ?? category.slug)
-    }
-  })
+  const category = post.data.category
+  if (category && !categoryMap.has(category)) {
+    categoryMap.set(category, category.charAt(0).toUpperCase() + category.slice(1))
+  }
 })
 
 const categories = Array.from(categoryMap.entries()).sort((a, b) =>
@@ -25,7 +23,7 @@ const categories = Array.from(categoryMap.entries()).sort((a, b) =>
 
 const allTags = Array.from(
   new Set(
-    posts.flatMap((post) => post.tags ?? [])
+    posts.flatMap((post) => post.data.tags ?? [])
   )
 ).sort((a, b) => a.localeCompare(b, 'pt-BR', {sensitivity: 'base'}))
 
