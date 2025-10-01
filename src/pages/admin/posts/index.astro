@@ -1,0 +1,386 @@
+---
+import AdminLayout from '@layouts/Admin.astro'
+import { getAllPosts, getAllCategories, getAllZodiacSigns } from '@lib/sanity'
+
+// Obter dados para filtros
+const categories = await getAllCategories()
+const zodiacSigns = await getAllZodiacSigns()
+
+// Por enquanto, vamos buscar os posts aqui
+// Na versão final, isso será feito via API client-side
+const allPosts = await getAllPosts()
+const posts = allPosts.sort((a, b) => {
+  const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0
+  const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0
+  return dateB - dateA
+})
+---
+
+<AdminLayout title="Posts" description="Gerenciar Posts">
+  <div class="posts-page">
+    <div class="page-header">
+      <h1 class="page-title">📝 Posts</h1>
+      <a href="/studio" class="brutal-button">+ Novo Post (Sanity)</a>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-card">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="status">Status</label>
+          <select id="status" class="filter-select">
+            <option value="all">Todos</option>
+            <option value="published">Publicados</option>
+            <option value="draft">Rascunhos</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="category">Categoria</label>
+          <select id="category" class="filter-select">
+            <option value="">Todas</option>
+            {categories?.map((cat) => (
+              <option value={cat.slug}>{cat.title}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="zodiacSign">Signo</label>
+          <select id="zodiacSign" class="filter-select">
+            <option value="">Todos</option>
+            {zodiacSigns?.map((sign) => (
+              <option value={sign.slug}>
+                {sign.symbol} {sign.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="search">Buscar</label>
+          <input
+            type="text"
+            id="search"
+            class="filter-input"
+            placeholder="Título do post..."
+          />
+        </div>
+      </div>
+
+      <button id="filterBtn" class="brutal-button">🔍 Filtrar</button>
+    </div>
+
+    <!-- Lista de Posts -->
+    <div class="posts-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>Signo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="postsTableBody">
+          {posts.slice(0, 20).map((post) => (
+            <tr>
+              <td>
+                <a href={`/blog/${post.slug}`} class="post-link" target="_blank">
+                  {post.title}
+                </a>
+              </td>
+              <td>
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString('pt-BR')
+                  : 'Sem data'}
+              </td>
+              <td>
+                {post.categories && post.categories.length > 0
+                  ? post.categories[0].title
+                  : '-'}
+              </td>
+              <td>
+                {post.zodiacSign
+                  ? `${post.zodiacSign.symbol} ${post.zodiacSign.name}`
+                  : '-'}
+              </td>
+              <td>
+                <span class:list={['status-badge', post.draft ? 'draft' : 'published']}>
+                  {post.draft ? '○ Rascunho' : '✓ Publicado'}
+                </span>
+              </td>
+              <td>
+                <div class="actions">
+                  <a href={`/blog/${post.slug}`} class="action-btn view" target="_blank" title="Preview">
+                    👁
+                  </a>
+                  <a href={`/studio/structure/blogPost;${post.id}`} class="action-btn edit" title="Editar no Sanity">
+                    ✏️
+                  </a>
+                  <button class="action-btn delete" data-id={post.id} data-title={post.title} title="Excluir">
+                    🗑️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {posts.length === 0 && (
+        <div class="empty-state">
+          <p>Nenhum post encontrado.</p>
+          <a href="/studio" class="brutal-button">Criar Primeiro Post</a>
+        </div>
+      )}
+    </div>
+
+    <!-- Paginação -->
+    {posts.length > 20 && (
+      <div class="pagination">
+        <button class="brutal-button" disabled>← Anterior</button>
+        <span class="page-info">Página 1 de {Math.ceil(posts.length / 20)}</span>
+        <button class="brutal-button">Próxima →</button>
+      </div>
+    )}
+  </div>
+
+  <style>
+    .posts-page {
+      max-width: 1400px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-family: 'Space Grotesk', system-ui;
+    }
+
+    /* Filters */
+    .filters-card {
+      background: var(--bg);
+      border: 4px solid var(--text);
+      box-shadow: 6px 6px 0 var(--text);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .filter-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+
+    .filter-select,
+    .filter-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 3px solid var(--text);
+      background: var(--bg);
+      font-family: 'Inter', system-ui;
+      font-size: 1rem;
+    }
+
+    .filter-select:focus,
+    .filter-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Table */
+    .posts-table {
+      background: var(--bg);
+      border: 4px solid var(--text);
+      box-shadow: 6px 6px 0 var(--text);
+      overflow-x: auto;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: var(--secondary);
+      border-bottom: 3px solid var(--text);
+    }
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      border-right: 2px solid var(--text);
+    }
+
+    th:last-child {
+      border-right: none;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 2px solid var(--text);
+      border-right: 2px solid var(--text);
+    }
+
+    td:last-child {
+      border-right: none;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .post-link {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .post-link:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 2px solid var(--text);
+      display: inline-block;
+    }
+
+    .status-badge.published {
+      background: var(--success);
+      color: var(--text);
+    }
+
+    .status-badge.draft {
+      background: #FFD700;
+      color: var(--text);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem;
+      font-size: 1.25rem;
+      border: 2px solid var(--text);
+      background: var(--bg);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .action-btn.view {
+      background: var(--primary);
+    }
+
+    .action-btn.edit {
+      background: var(--secondary);
+    }
+
+    .action-btn.delete {
+      background: var(--error);
+    }
+
+    .empty-state {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .empty-state p {
+      margin-bottom: 1.5rem;
+      font-size: 1.125rem;
+      color: #666;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .page-info {
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 0.875rem;
+      }
+
+      th, td {
+        padding: 0.5rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script>
+    // Handle delete
+    document.querySelectorAll('.action-btn.delete').forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const button = e.target as HTMLButtonElement
+        const id = button.dataset.id
+        const title = button.dataset.title
+
+        if (!id) return
+
+        const confirmed = confirm(`Tem certeza que deseja excluir o post "${title}"?\n\nEsta ação não pode ser desfeita.`)
+
+        if (confirmed) {
+          try {
+            const response = await fetch(`/api/admin/posts/${id}`, {
+              method: 'DELETE',
+            })
+
+            const data = await response.json()
+
+            if (data.success) {
+              alert('Post excluído com sucesso!')
+              window.location.reload()
+            } else {
+              alert(`Erro ao excluir: ${data.error}`)
+            }
+          } catch (error) {
+            alert('Erro de conexão ao excluir post')
+            console.error(error)
+          }
+        }
+      })
+    })
+  </script>
+</AdminLayout>

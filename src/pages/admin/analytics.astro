@@ -1,0 +1,109 @@
+---
+import AdminLayout from '@layouts/Admin.astro'
+---
+
+<AdminLayout title="Analytics" description="Analytics e Métricas">
+  <div class="analytics-page">
+    <h1 class="page-title">📈 Analytics</h1>
+
+    <div class="coming-soon">
+      <div class="coming-soon-card">
+        <span class="icon">📊</span>
+        <h2>Em Desenvolvimento</h2>
+        <p>
+          O sistema de analytics está sendo implementado e estará disponível em breve.
+        </p>
+        <p>
+          <strong>Recursos planejados:</strong>
+        </p>
+        <ul>
+          <li>📊 Total de visualizações por período</li>
+          <li>🏆 Top 10 posts mais acessados</li>
+          <li>📈 Gráficos de visualizações por dia</li>
+          <li>🎯 Visualizações por categoria</li>
+          <li>♌ Visualizações por signo zodiacal</li>
+          <li>📱 Estatísticas de dispositivos</li>
+        </ul>
+
+        <div class="actions">
+          <a href="/admin" class="brutal-button">Voltar ao Dashboard</a>
+          <a href="/admin/posts" class="brutal-button">Ver Posts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .analytics-page {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-family: 'Space Grotesk', system-ui;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .coming-soon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .coming-soon-card {
+      background: var(--bg);
+      border: 4px solid var(--text);
+      box-shadow: 8px 8px 0 var(--text);
+      padding: 3rem 2rem;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .coming-soon-card h2 {
+      font-size: 2rem;
+      font-family: 'Space Grotesk', system-ui;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .coming-soon-card p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-size: 1.125rem;
+    }
+
+    .coming-soon-card ul {
+      text-align: left;
+      margin: 0 auto 2rem;
+      max-width: 400px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .coming-soon-card li {
+      padding: 0.5rem 0;
+      border-bottom: 2px solid #eee;
+      font-weight: 500;
+    }
+
+    .coming-soon-card li:last-child {
+      border-bottom: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</AdminLayout>

@@ -1,35 +1,8 @@
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import UnoCSS from 'unocss/astro'
-import sanity from '@sanity/astro'
 import react from '@astrojs/react'
-import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-
-const readEnvValue = (key: string): string | undefined => {
-  if (process.env[key]) return process.env[key]
-
-  try {
-    const envPath = resolve(process.cwd(), '.env')
-    const file = readFileSync(envPath, 'utf8')
-
-    for (const rawLine of file.split('\n')) {
-      const line = rawLine.trim()
-
-      if (!line || line.startsWith('#')) continue
-
-      const [lineKey, ...valueParts] = line.split('=')
-      if (lineKey === key) return valueParts.join('=').trim()
-    }
-  } catch {
-    // Ignore missing env file and fall back to defaults
-  }
-
-  return undefined
-}
-
-const sanityProjectId = readEnvValue('PUBLIC_SANITY_PROJECT_ID') || 'ocywki9g'
-const sanityDataset = readEnvValue('PUBLIC_SANITY_DATASET') || 'production'
 
 export default defineConfig({
   // used to generate images
@@ -40,20 +13,20 @@ export default defineConfig({
         ? `https://${process.env.VERCEL_URL}/`
         : 'https://localhost:3000/',
   trailingSlash: 'ignore',
+  output: 'server',
   integrations: [
     react(),
     sitemap(),
     UnoCSS({ injectReset: true }),
-    sanity({
-      projectId: sanityProjectId,
-      dataset: sanityDataset,
-      useCdn: false,
-      studioBasePath: '/admin',
-    }),
   ],
   vite: {
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
+    },
+    resolve: {
+      alias: {
+        '@lib': resolve('./src/lib'),
+      },
     },
   },
   server: {

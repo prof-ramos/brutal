@@ -1,0 +1,249 @@
+---
+import { getSessionToken } from '@lib/admin/session'
+
+// Verificar se já está autenticado
+const token = getSessionToken(Astro.cookies)
+if (token) {
+  return Astro.redirect('/admin')
+}
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Brutal Astrology Blog</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: #ffffff;
+        color: #000000;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .login-card {
+        background: #ffffff;
+        border: 4px solid #000000;
+        box-shadow: 8px 8px 0 #000000;
+        padding: 3rem 2rem;
+      }
+
+      .logo {
+        font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #4CA6DF;
+      }
+
+      .logo-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 3px solid #000000;
+        background: #ffffff;
+        font-size: 1rem;
+        font-family: 'Inter', system-ui;
+        transition: all 0.2s;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #4CA6DF;
+        box-shadow: 4px 4px 0 #4CA6DF;
+        transform: translate(-4px, -4px);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 1rem;
+        background: #BFFF00;
+        border: 3px solid #000000;
+        font-family: 'Space Grotesk', system-ui;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 4px 4px 0 #000000;
+      }
+
+      .btn:hover:not(:disabled) {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 #000000;
+      }
+
+      .btn:active:not(:disabled) {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #000000;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .error {
+        background: #FF0000;
+        color: #ffffff;
+        padding: 1rem;
+        border: 3px solid #000000;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        display: none;
+      }
+
+      .error.show {
+        display: block;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+
+      .loading.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <div class="logo">
+          <span class="logo-icon">♌</span>
+          Brutal Astrology Admin
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn" id="submitBtn">
+            Login
+          </button>
+
+          <div class="loading" id="loading">Autenticando...</div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById('loginForm') as HTMLFormElement
+      const errorDiv = document.getElementById('error') as HTMLDivElement
+      const loadingDiv = document.getElementById('loading') as HTMLDivElement
+      const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement
+
+      function showError(message: string) {
+        errorDiv.textContent = message
+        errorDiv.classList.add('show')
+      }
+
+      function hideError() {
+        errorDiv.classList.remove('show')
+      }
+
+      function setLoading(loading: boolean) {
+        if (loading) {
+          submitBtn.disabled = true
+          loadingDiv.classList.add('show')
+        } else {
+          submitBtn.disabled = false
+          loadingDiv.classList.remove('show')
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        hideError()
+        setLoading(true)
+
+        const formData = new FormData(form)
+        const username = formData.get('username') as string
+        const password = formData.get('password') as string
+
+        try {
+          const response = await fetch('/api/admin/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+          })
+
+          const data = await response.json()
+
+          if (data.success) {
+            // Redirecionar para dashboard
+            window.location.href = '/admin'
+          } else {
+            showError(data.error || 'Erro ao fazer login')
+            setLoading(false)
+          }
+        } catch (error) {
+          showError('Erro de conexão. Tente novamente.')
+          setLoading(false)
+        }
+      })
+    </script>
+  </body>
+</html>
