@@ -1,0 +1,315 @@
+---
+import AdminLayout from '@layouts/Admin.astro'
+import { getAllPosts } from '@lib/posts'
+
+// Obter todos os posts
+const allPosts = await getAllPosts()
+
+// Calcular estatísticas
+const totalPosts = allPosts.filter((p) => !p.data.draft).length
+const totalDrafts = allPosts.filter((p) => p.data.draft).length
+
+// Posts recentes (últimos 5)
+const recentPosts = allPosts
+  .filter((p) => !p.data.draft)
+  .slice(0, 5)
+---
+
+<AdminLayout title="Dashboard" description="Admin Dashboard">
+  <div class="dashboard">
+    <h1 class="page-title">📊 Dashboard</h1>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">{totalPosts}</div>
+        <div class="stat-label">Posts Publicados</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">{totalDrafts}</div>
+        <div class="stat-label">Rascunhos</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">-</div>
+        <div class="stat-label">Views (30 dias)</div>
+        <div class="stat-note">Em breve</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value">-</div>
+        <div class="stat-label">Top Post</div>
+        <div class="stat-note">Em breve</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h2>Ações Rápidas</h2>
+      <div class="actions-grid">
+        <a href="/admin/posts/new" class="action-card">
+          <span class="action-icon">➕</span>
+          <span class="action-label">Novo Post</span>
+        </a>
+
+        <a href="/admin/posts" class="action-card">
+          <span class="action-icon">📝</span>
+          <span class="action-label">Ver Todos os Posts</span>
+        </a>
+
+        <a href="/studio" class="action-card">
+          <span class="action-icon">🎨</span>
+          <span class="action-label">Sanity Studio</span>
+        </a>
+
+        <a href="/admin/analytics" class="action-card">
+          <span class="action-icon">📈</span>
+          <span class="action-label">Analytics</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Recent Posts -->
+    <div class="recent-posts">
+      <h2>Posts Recentes</h2>
+      <div class="posts-list">
+        {
+          recentPosts.length > 0 ? (
+            recentPosts.map((post) => (
+              <div class="post-item">
+                <div class="post-info">
+                  <a href={`/blog/${post.slug}`} class="post-title">
+                    {post.title}
+                  </a>
+                  <div class="post-meta">
+                    {post.publishedAt
+                      ? new Date(post.publishedAt).toLocaleDateString('pt-BR')
+                      : 'Sem data'}
+                    {post.zodiacSign?.name && (
+                      <span class="post-sign">
+                        {post.zodiacSign.symbol} {post.zodiacSign.name}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div class="post-actions">
+                  <a href={`/admin/posts/edit/${post.id}`} class="action-btn">
+                    ✏️ Editar
+                  </a>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div class="empty-state">
+              <p>Nenhum post publicado ainda.</p>
+              <a href="/admin/posts/new" class="brutal-button">
+                Criar Primeiro Post
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .dashboard {
+      max-width: 1200px;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      font-family: 'Space Grotesk', system-ui;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg);
+      border: 4px solid var(--text);
+      box-shadow: 6px 6px 0 var(--text);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', system-ui;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+    }
+
+    .stat-note {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      margin-bottom: 3rem;
+    }
+
+    .quick-actions h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .action-card {
+      background: var(--secondary);
+      border: 4px solid var(--text);
+      box-shadow: 6px 6px 0 var(--text);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .action-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--text);
+    }
+
+    .action-icon {
+      font-size: 2rem;
+    }
+
+    .action-label {
+      font-weight: 700;
+      font-family: 'Space Grotesk', system-ui;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+    }
+
+    /* Recent Posts */
+    .recent-posts {
+      margin-bottom: 3rem;
+    }
+
+    .recent-posts h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .posts-list {
+      background: var(--bg);
+      border: 4px solid var(--text);
+      box-shadow: 6px 6px 0 var(--text);
+    }
+
+    .post-item {
+      padding: 1.5rem;
+      border-bottom: 3px solid var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .post-item:last-child {
+      border-bottom: none;
+    }
+
+    .post-info {
+      flex: 1;
+    }
+
+    .post-title {
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-title:hover {
+      color: var(--primary);
+    }
+
+    .post-meta {
+      font-size: 0.875rem;
+      color: #666;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .post-sign {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      border: 2px solid var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: var(--text);
+    }
+
+    .empty-state {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .empty-state p {
+      margin-bottom: 1.5rem;
+      font-size: 1.125rem;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .post-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .post-actions {
+        width: 100%;
+      }
+
+      .action-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</AdminLayout>
